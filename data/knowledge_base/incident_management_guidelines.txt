@@ -1,0 +1,132 @@
+# Incident Management and Traffic Impact Guidelines
+
+## 1. Types of Traffic Incidents
+
+### 1.1 Vehicle Accidents
+- **Minor**: Fender benders, no injuries, vehicles movable
+  - Typical clearance time: 15-30 minutes
+  - Lane blockage: Usually 1 lane
+  - Congestion impact: Low to Moderate
+
+- **Moderate**: Property damage, possible minor injuries
+  - Typical clearance time: 30-60 minutes
+  - Lane blockage: 1-2 lanes
+  - Congestion impact: Moderate to Heavy
+
+- **Severe**: Serious injuries, multiple vehicles, emergency response required
+  - Typical clearance time: 1-3 hours
+  - Lane blockage: Multiple lanes or full closure
+  - Congestion impact: Severe, may affect alternate routes
+
+### 1.2 Vehicle Breakdowns
+- **Standard Breakdown**: Engine failure, flat tire
+  - Clearance time: 20-45 minutes
+  - Impact: Typically 1 lane, low congestion
+
+- **Commercial Vehicle Breakdown**: Trucks, buses
+  - Clearance time: 45-90 minutes
+  - Impact: May block multiple lanes, moderate congestion
+
+### 1.3 Road Construction/Maintenance
+- **Scheduled Roadwork**
+  - Duration: Hours to months
+  - Impact: Reduced capacity, predictable patterns
+  - Mitigation: Advance public notification
+
+- **Emergency Repairs**
+  - Duration: Hours to days
+  - Impact: Unexpected congestion spikes
+  - Mitigation: Real-time alerts, detour planning
+
+### 1.4 Special Events
+- **Planned Events**: Concerts, sports, festivals
+  - Impact: Predictable surge in demand
+  - Mitigation: Traffic management plans, public transport promotion
+
+- **Unplanned Gatherings**: Protests, VIP movements
+  - Impact: Unpredictable road closures
+  - Mitigation: Real-time response, alternate route activation
+
+## 2. Incident Impact Calculation
+
+### 2.1 Capacity Reduction Formula
+For each blocked lane:
+- 1 lane blocked on 2-lane road: 65-75% capacity reduction
+- 1 lane blocked on 3-lane road: 45-55% capacity reduction
+- 1 lane blocked on 4-lane road: 30-40% capacity reduction
+
+### 2.2 Queue Formation
+Queue length grows at approximately:
+- 25-35 vehicles per minute per blocked lane during peak hours
+- 10-15 vehicles per minute per blocked lane during off-peak
+
+### 2.3 Clearance Time Impact
+Every 10 minutes of incident duration adds approximately:
+- 3-5 minutes additional delay for upstream traffic
+- 15-20% extension to overall congestion duration
+
+## 3. Incident Severity Classification
+
+### Level 1: Minor
+- **Criteria**: No lane blockage, or shoulder only
+- **Response**: Routine clearance
+- **Expected Duration**: < 30 minutes
+- **Congestion Impact**: Minimal
+
+### Level 2: Moderate
+- **Criteria**: 1-2 lanes blocked, no major injuries
+- **Response**: Priority clearance
+- **Expected Duration**: 30-60 minutes
+- **Congestion Impact**: Moderate (30-50% speed reduction)
+
+### Level 3: Major
+- **Criteria**: Multiple lanes blocked, injuries, emergency response
+- **Response**: Full incident management protocol
+- **Expected Duration**: 1-2 hours
+- **Congestion Impact**: Severe (50-70% speed reduction)
+
+### Level 4: Critical
+- **Criteria**: Full road closure, fatalities, hazmat
+- **Response**: Multi-agency coordination
+- **Expected Duration**: 2+ hours
+- **Congestion Impact**: Maximum, spillover to alternate routes
+
+## 4. Incident-Congestion Relationship Patterns
+
+### 4.1 Peak Hour Incidents
+Incidents during peak hours cause:
+- 3-4x longer congestion duration than off-peak
+- Faster queue formation
+- Greater spillover to adjacent roads
+
+### 4.2 Incident Clustering
+Multiple incidents in proximity cause:
+- Compounded congestion effects
+- Reduced alternate route effectiveness
+- Extended recovery time
+
+### 4.3 Secondary Incidents
+Congestion from primary incidents increases risk of secondary incidents by:
+- 20-30% within the first hour
+- Often more severe due to distracted/frustrated drivers
+
+## 5. Recommendations for Incident-Related Congestion
+
+1. **Quick Clearance**: Every minute of faster clearance saves 4-5 minutes of congestion
+2. **Early Detection**: Use sensors/cameras to identify incidents within 2 minutes
+3. **Public Communication**: Issue alerts within 5 minutes of incident confirmation
+4. **Alternate Routes**: Pre-plan and activate detours for common incident locations
+5. **Post-Incident Monitoring**: Continue monitoring for 30-60 minutes after clearance
+
+## 6. Bangalore-Specific Incident Patterns
+
+### High-Incident Locations
+- Silk Board Junction
+- KR Puram Bridge
+- Marathahalli Bridge
+- Hebbal Flyover
+
+### Peak Incident Times
+- Morning peak: 8:30 AM - 10:00 AM
+- Evening peak: 5:30 PM - 8:00 PM
+- Weekend evenings: Higher alcohol-related incidents

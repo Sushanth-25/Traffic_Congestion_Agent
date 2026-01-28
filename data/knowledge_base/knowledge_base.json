@@ -1,0 +1,284 @@
+[
+  {
+    "id": "bangalore_urban_mobility_0",
+    "source": "bangalore_urban_mobility.txt",
+    "content": "# Urban Mobility Framework for Bangalore\n\n## 1. Bangalore Traffic Network Overview\n\n### 1.1 City Profile\n- **Population**: ~13 million (metro area)\n- **Registered Vehicles**: ~10 million\n- **Road Network**: ~14,000 km\n- **Daily Trips**: ~12-15 million\n\n### 1.2 Road Hierarchy\n1. **Expressways/Ring Roads**: Outer Ring Road, NICE Road\n2. **Arterial Roads**: Major corridors connecting zones\n3. **Collector Roads**: Distribute traffic within zones\n4. **Local Roads**: Residential area access\n\n## 2. Maj",
+    "type": "knowledge_base"
+  },
+  {
+    "id": "bangalore_urban_mobility_1",
+    "source": "bangalore_urban_mobility.txt",
+    "content": "*Local Roads**: Residential area access\n\n## 2. Major Traffic Corridors and Their Characteristics\n\n### 2.1 Indiranagar\n**Roads Covered**: 100 Feet Road, CMH Road\n\n**Characteristics**:\n- Mixed residential-commercial zone\n- High restaurant/entertainment density\n- Significant weekend traffic\n- Average daily traffic: 60,000+ vehicles\n\n**Congestion Drivers**:\n- Evening dining/entertainment\n- Parking scarcity\n- Narrow connecting roads\n\n### 2.2 Koramangala\n**Roads Covered**: Sony World Junction, Sarjapu",
+    "type": "knowledge_base"
+  },
+  {
+    "id": "bangalore_urban_mobility_2",
+    "source": "bangalore_urban_mobility.txt",
+    "content": "la\n**Roads Covered**: Sony World Junction, Sarjapur Road\n\n**Characteristics**:\n- Startup hub with IT offices\n- Young demographic, high two-wheeler usage\n- Multiple schools and colleges\n\n**Congestion Drivers**:\n- IT office timings\n- School traffic\n- Growing commercial activity\n\n### 2.3 Whitefield\n**Roads Covered**: Marathahalli Bridge, Whitefield Main Road\n\n**Characteristics**:\n- Major IT/ITES employment hub\n- Rapid urbanization\n- Limited public transport\n\n**Congestion Drivers**:\n- Concentrated e",
+    "type": "knowledge_base"
+  },
+  {
+    "id": "bangalore_urban_mobility_3",
+    "source": "bangalore_urban_mobility.txt",
+    "content": "ransport\n\n**Congestion Drivers**:\n- Concentrated employment centers\n- Inadequate road infrastructure\n- Single-point bridge bottlenecks\n\n### 2.4 M.G. Road\n**Roads Covered**: Trinity Circle, Anil Kumble Circle\n\n**Characteristics**:\n- Central business district\n- Metro connectivity\n- Heritage commercial area\n\n**Congestion Drivers**:\n- Commercial activity\n- Event venue proximity\n- Limited parking\n\n### 2.5 Jayanagar\n**Roads Covered**: Jayanagar 4th Block, South End Circle\n\n**Characteristics**:\n- Estab",
+    "type": "knowledge_base"
+  },
+  {
+    "id": "bangalore_urban_mobility_4",
+    "source": "bangalore_urban_mobility.txt",
+    "content": "ck, South End Circle\n\n**Characteristics**:\n- Established residential area\n- Multiple educational institutions\n- Well-planned grid layout\n\n**Congestion Drivers**:\n- School traffic\n- Commercial zone around 4th Block\n- Residential area ingress/egress\n\n### 2.6 Hebbal\n**Roads Covered**: Hebbal Flyover, Bellary Road\n\n**Characteristics**:\n- Northern gateway to city\n- Airport access route\n- Industrial corridor\n\n**Congestion Drivers**:\n- Airport traffic\n- North Bangalore growth\n- Flyover bottleneck\n\n###",
+    "type": "knowledge_base"
+  },
+  {
+    "id": "bangalore_urban_mobility_5",
+    "source": "bangalore_urban_mobility.txt",
+    "content": "North Bangalore growth\n- Flyover bottleneck\n\n### 2.7 Yeshwanthpur\n**Roads Covered**: Yeshwanthpur Circle, Tumkur Road\n\n**Characteristics**:\n- Industrial and commercial zone\n- Rail and bus terminal\n- Wholesale markets\n\n**Congestion Drivers**:\n- Commercial vehicle activity\n- Market operations\n- Multi-modal interchange\n\n### 2.8 Electronic City\n**Roads Covered**: Electronic City Flyover, Hosur Road\n\n**Characteristics**:\n- Major IT employment zone\n- Elevated corridor access\n- Peripheral location\n\n**",
+    "type": "knowledge_base"
+  },
+  {
+    "id": "bangalore_urban_mobility_6",
+    "source": "bangalore_urban_mobility.txt",
+    "content": "Elevated corridor access\n- Peripheral location\n\n**Congestion Drivers**:\n- Concentrated office timings\n- Single corridor dependency\n- Toll plaza queuing\n\n## 3. Traffic Flow Optimization Strategies\n\n### 3.1 Signal Coordination\n- Implement green wave corridors\n- Adaptive signal timing based on real-time demand\n- Priority signals for public transport\n\n### 3.2 Demand Management\n- Promote flexible work hours\n- Encourage work-from-home\n- Congestion pricing (future consideration)\n\n### 3.3 Mode Shift\n- M",
+    "type": "knowledge_base"
+  },
+  {
+    "id": "bangalore_urban_mobility_7",
+    "source": "bangalore_urban_mobility.txt",
+    "content": "ing (future consideration)\n\n### 3.3 Mode Shift\n- Metro rail expansion\n- Bus rapid transit\n- Last-mile connectivity\n\n### 3.4 Infrastructure\n- Grade separators at major junctions\n- Service road improvements\n- Parking management\n\n## 4. Multi-Modal Integration\n\n### 4.1 Metro Rail\n- Current: 70+ km operational\n- Impact: 10-15% traffic reduction on parallel corridors\n- Key interchanges: Majestic, MG Road, Whitefield\n\n### 4.2 Bus Network\n- BMTC operates 6,000+ buses\n- Ridership: 3+ million daily\n- Inte",
+    "type": "knowledge_base"
+  },
+  {
+    "id": "bangalore_urban_mobility_8",
+    "source": "bangalore_urban_mobility.txt",
+    "content": "6,000+ buses\n- Ridership: 3+ million daily\n- Integration with metro feeder routes\n\n### 4.3 Intermediate Public Transport\n- Auto-rickshaws: 150,000+ registered\n- Ride-hailing: Significant presence\n- First/last mile solution\n\n## 5. Future Mobility Considerations\n\n### 5.1 Emerging Trends\n- Electric vehicles adoption\n- Shared mobility growth\n- Micro-mobility (bikes, scooters)\n\n### 5.2 Infrastructure Projects\n- Metro Phase 2 and 3\n- Peripheral Ring Road\n- Suburban rail\n\n### 5.3 Technology Integratio",
+    "type": "knowledge_base"
+  },
+  {
+    "id": "bangalore_urban_mobility_9",
+    "source": "bangalore_urban_mobility.txt",
+    "content": "oad\n- Suburban rail\n\n### 5.3 Technology Integration\n- Intelligent Transportation Systems\n- Real-time traffic information\n- Connected vehicle infrastructure\n\n## 6. Explainability Framework for Operators\n\nWhen explaining congestion to operators, consider:\n\n1. **Location Context**: What type of area is affected?\n2. **Time Context**: Is this expected for this time/day?\n3. **Immediate Cause**: What triggered the congestion?\n4. **Contributing Factors**: Weather, incidents, events\n5. **Historical Patte",
+    "type": "knowledge_base"
+  },
+  {
+    "id": "bangalore_urban_mobility_10",
+    "source": "bangalore_urban_mobility.txt",
+    "content": ": Weather, incidents, events\n5. **Historical Pattern**: Is this recurring or anomalous?\n6. **Expected Duration**: Based on cause type\n7. **Recommended Actions**: What can be done?\n\nThis framework ensures explanations are:\n- Contextual\n- Actionable\n- Trust-building\n- Consistent",
+    "type": "knowledge_base"
+  },
+  {
+    "id": "incident_management_guidelines_0",
+    "source": "incident_management_guidelines.txt",
+    "content": "# Incident Management and Traffic Impact Guidelines\n\n## 1. Types of Traffic Incidents\n\n### 1.1 Vehicle Accidents\n- **Minor**: Fender benders, no injuries, vehicles movable\n  - Typical clearance time: 15-30 minutes\n  - Lane blockage: Usually 1 lane\n  - Congestion impact: Low to Moderate\n\n- **Moderate**: Property damage, possible minor injuries\n  - Typical clearance time: 30-60 minutes\n  - Lane blockage: 1-2 lanes\n  - Congestion impact: Moderate to Heavy\n\n- **Severe**: Serious injuries, multiple v",
+    "type": "knowledge_base"
+  },
+  {
+    "id": "incident_management_guidelines_1",
+    "source": "incident_management_guidelines.txt",
+    "content": "Heavy\n\n- **Severe**: Serious injuries, multiple vehicles, emergency response required\n  - Typical clearance time: 1-3 hours\n  - Lane blockage: Multiple lanes or full closure\n  - Congestion impact: Severe, may affect alternate routes\n\n### 1.2 Vehicle Breakdowns\n- **Standard Breakdown**: Engine failure, flat tire\n  - Clearance time: 20-45 minutes\n  - Impact: Typically 1 lane, low congestion\n\n- **Commercial Vehicle Breakdown**: Trucks, buses\n  - Clearance time: 45-90 minutes\n  - Impact: May block",
+    "type": "knowledge_base"
+  },
+  {
+    "id": "incident_management_guidelines_2",
+    "source": "incident_management_guidelines.txt",
+    "content": "earance time: 45-90 minutes\n  - Impact: May block multiple lanes, moderate congestion\n\n### 1.3 Road Construction/Maintenance\n- **Scheduled Roadwork**\n  - Duration: Hours to months\n  - Impact: Reduced capacity, predictable patterns\n  - Mitigation: Advance public notification\n\n- **Emergency Repairs**\n  - Duration: Hours to days\n  - Impact: Unexpected congestion spikes\n  - Mitigation: Real-time alerts, detour planning\n\n### 1.4 Special Events\n- **Planned Events**: Concerts, sports, festivals\n  - Imp",
+    "type": "knowledge_base"
+  },
+  {
+    "id": "incident_management_guidelines_3",
+    "source": "incident_management_guidelines.txt",
+    "content": "nned Events**: Concerts, sports, festivals\n  - Impact: Predictable surge in demand\n  - Mitigation: Traffic management plans, public transport promotion\n\n- **Unplanned Gatherings**: Protests, VIP movements\n  - Impact: Unpredictable road closures\n  - Mitigation: Real-time response, alternate route activation\n\n## 2. Incident Impact Calculation\n\n### 2.1 Capacity Reduction Formula\nFor each blocked lane:\n- 1 lane blocked on 2-lane road: 65-75% capacity reduction\n- 1 lane blocked on 3-lane road: 45-55%",
+    "type": "knowledge_base"
+  },
+  {
+    "id": "incident_management_guidelines_4",
+    "source": "incident_management_guidelines.txt",
+    "content": "reduction\n- 1 lane blocked on 3-lane road: 45-55% capacity reduction\n- 1 lane blocked on 4-lane road: 30-40% capacity reduction\n\n### 2.2 Queue Formation\nQueue length grows at approximately:\n- 25-35 vehicles per minute per blocked lane during peak hours\n- 10-15 vehicles per minute per blocked lane during off-peak\n\n### 2.3 Clearance Time Impact\nEvery 10 minutes of incident duration adds approximately:\n- 3-5 minutes additional delay for upstream traffic\n- 15-20% extension to overall congestion dur",
+    "type": "knowledge_base"
+  },
+  {
+    "id": "incident_management_guidelines_5",
+    "source": "incident_management_guidelines.txt",
+    "content": "affic\n- 15-20% extension to overall congestion duration\n\n## 3. Incident Severity Classification\n\n### Level 1: Minor\n- **Criteria**: No lane blockage, or shoulder only\n- **Response**: Routine clearance\n- **Expected Duration**: < 30 minutes\n- **Congestion Impact**: Minimal\n\n### Level 2: Moderate\n- **Criteria**: 1-2 lanes blocked, no major injuries\n- **Response**: Priority clearance\n- **Expected Duration**: 30-60 minutes\n- **Congestion Impact**: Moderate (30-50% speed reduction)\n\n### Level 3: Major",
+    "type": "knowledge_base"
+  },
+  {
+    "id": "incident_management_guidelines_6",
+    "source": "incident_management_guidelines.txt",
+    "content": "erate (30-50% speed reduction)\n\n### Level 3: Major\n- **Criteria**: Multiple lanes blocked, injuries, emergency response\n- **Response**: Full incident management protocol\n- **Expected Duration**: 1-2 hours\n- **Congestion Impact**: Severe (50-70% speed reduction)\n\n### Level 4: Critical\n- **Criteria**: Full road closure, fatalities, hazmat\n- **Response**: Multi-agency coordination\n- **Expected Duration**: 2+ hours\n- **Congestion Impact**: Maximum, spillover to alternate routes\n\n## 4. Incident-Conge",
+    "type": "knowledge_base"
+  },
+  {
+    "id": "incident_management_guidelines_7",
+    "source": "incident_management_guidelines.txt",
+    "content": "pillover to alternate routes\n\n## 4. Incident-Congestion Relationship Patterns\n\n### 4.1 Peak Hour Incidents\nIncidents during peak hours cause:\n- 3-4x longer congestion duration than off-peak\n- Faster queue formation\n- Greater spillover to adjacent roads\n\n### 4.2 Incident Clustering\nMultiple incidents in proximity cause:\n- Compounded congestion effects\n- Reduced alternate route effectiveness\n- Extended recovery time\n\n### 4.3 Secondary Incidents\nCongestion from primary incidents increases risk of s",
+    "type": "knowledge_base"
+  },
+  {
+    "id": "incident_management_guidelines_8",
+    "source": "incident_management_guidelines.txt",
+    "content": "gestion from primary incidents increases risk of secondary incidents by:\n- 20-30% within the first hour\n- Often more severe due to distracted/frustrated drivers\n\n## 5. Recommendations for Incident-Related Congestion\n\n1. **Quick Clearance**: Every minute of faster clearance saves 4-5 minutes of congestion\n2. **Early Detection**: Use sensors/cameras to identify incidents within 2 minutes\n3. **Public Communication**: Issue alerts within 5 minutes of incident confirmation\n4. **Alternate Routes**: Pr",
+    "type": "knowledge_base"
+  },
+  {
+    "id": "incident_management_guidelines_9",
+    "source": "incident_management_guidelines.txt",
+    "content": "incident confirmation\n4. **Alternate Routes**: Pre-plan and activate detours for common incident locations\n5. **Post-Incident Monitoring**: Continue monitoring for 30-60 minutes after clearance\n\n## 6. Bangalore-Specific Incident Patterns\n\n### High-Incident Locations\n- Silk Board Junction\n- KR Puram Bridge\n- Marathahalli Bridge\n- Hebbal Flyover\n\n### Peak Incident Times\n- Morning peak: 8:30 AM - 10:00 AM\n- Evening peak: 5:30 PM - 8:00 PM\n- Weekend evenings: Higher alcohol-related incidents",
+    "type": "knowledge_base"
+  },
+  {
+    "id": "incident_management_guidelines_10",
+    "source": "incident_management_guidelines.txt",
+    "content": "evenings: Higher alcohol-related incidents",
+    "type": "knowledge_base"
+  },
+  {
+    "id": "time_patterns_analysis_0",
+    "source": "time_patterns_analysis.txt",
+    "content": "# Time-Based Traffic Patterns and Peak Hour Analysis\n\n## 1. Daily Traffic Patterns\n\n### 1.1 Morning Peak (7:00 AM - 10:30 AM)\n- **Peak Intensity**: 8:00 AM - 9:30 AM\n- **Characteristics**:\n  - Concentrated inbound flow to business districts\n  - School traffic adds to congestion\n  - Highest demand on arterial roads\n- **Typical Congestion Level**: Heavy to Severe\n- **Primary Cause**: Work/School commute demand exceeding capacity\n\n### 1.2 Midday (10:30 AM - 4:00 PM)\n- **Characteristics**:\n  - Relat",
+    "type": "knowledge_base"
+  },
+  {
+    "id": "time_patterns_analysis_1",
+    "source": "time_patterns_analysis.txt",
+    "content": ":30 AM - 4:00 PM)\n- **Characteristics**:\n  - Relatively stable flow\n  - Commercial vehicle activity\n  - School pickup (2:30 PM - 3:30 PM)\n- **Typical Congestion Level**: Light to Moderate\n- **Primary Cause**: Regular urban activity\n\n### 1.3 Evening Peak (5:00 PM - 8:30 PM)\n- **Peak Intensity**: 6:00 PM - 7:30 PM\n- **Characteristics**:\n  - Concentrated outbound flow from business districts\n  - Shopping and recreational trips\n  - More dispersed than morning peak\n- **Typical Congestion Level**: Hea",
+    "type": "knowledge_base"
+  },
+  {
+    "id": "time_patterns_analysis_2",
+    "source": "time_patterns_analysis.txt",
+    "content": "n morning peak\n- **Typical Congestion Level**: Heavy to Severe\n- **Primary Cause**: Work commute + recreational travel\n\n### 1.4 Night (8:30 PM - 7:00 AM)\n- **Characteristics**:\n  - Low traffic volumes\n  - Commercial vehicle movement\n  - Nightlife activity on weekends\n- **Typical Congestion Level**: Light\n- **Primary Cause**: N/A (generally free flow)\n\n## 2. Weekly Traffic Patterns\n\n### 2.1 Weekdays (Monday - Friday)\n- **Monday**: \n  - Gradual ramp-up, often lighter than mid-week\n  - Some remote",
+    "type": "knowledge_base"
+  },
+  {
+    "id": "time_patterns_analysis_3",
+    "source": "time_patterns_analysis.txt",
+    "content": "p-up, often lighter than mid-week\n  - Some remote work effect\n  \n- **Tuesday - Thursday**: \n  - Highest congestion days\n  - Most predictable patterns\n  - Peak demand days for traffic system\n  \n- **Friday**: \n  - Extended evening peak (starts earlier)\n  - Weekend travel begins\n  - Higher recreational traffic\n\n### 2.2 Weekends (Saturday - Sunday)\n- **Saturday**:\n  - Late morning peak (10:00 AM - 12:00 PM)\n  - Shopping and recreational trips\n  - 30-40% lower overall congestion than weekdays\n  \n- **",
+    "type": "knowledge_base"
+  },
+  {
+    "id": "time_patterns_analysis_4",
+    "source": "time_patterns_analysis.txt",
+    "content": "40% lower overall congestion than weekdays\n  \n- **Sunday**:\n  - Lowest congestion day\n  - Evening increase (return travel)\n  - 40-50% lower than weekdays\n\n## 3. Monthly and Seasonal Patterns\n\n### 3.1 End of Month\n- Salary days increase shopping activity\n- 10-15% higher congestion than mid-month\n\n### 3.2 Festival Seasons\n- Diwali, Dussehra: High shopping traffic\n- Extended peak hours\n- 25-35% increase in overall traffic\n\n### 3.3 School Calendar\n- School holidays: 20-25% reduction in morning peak",
+    "type": "knowledge_base"
+  },
+  {
+    "id": "time_patterns_analysis_5",
+    "source": "time_patterns_analysis.txt",
+    "content": "School holidays: 20-25% reduction in morning peak\n- Exam periods: Variable patterns\n- Summer break: Noticeable reduction in peak congestion\n\n## 4. Bangalore-Specific Patterns\n\n### 4.1 IT Corridor Traffic\n**Affected Areas**: Whitefield, Electronic City, Outer Ring Road\n\n**Characteristics**:\n- Multiple shift timings (9 AM, 10 AM, 2 PM)\n- Cab aggregator concentration\n- Extended peak hours\n- Work-from-home impact variable\n\n### 4.2 Traditional Commercial Areas\n**Affected Areas**: M.G. Road, Brigade R",
+    "type": "knowledge_base"
+  },
+  {
+    "id": "time_patterns_analysis_6",
+    "source": "time_patterns_analysis.txt",
+    "content": "ial Areas\n**Affected Areas**: M.G. Road, Brigade Road, Commercial Street\n\n**Characteristics**:\n- Shopping peak: 11 AM - 1 PM, 5 PM - 8 PM\n- Weekend afternoon congestion\n- Festival season spikes\n\n### 4.3 Residential Corridors\n**Affected Areas**: Jayanagar, Indiranagar, Koramangala\n\n**Characteristics**:\n- Strong morning/evening peaks\n- School traffic impact\n- Weekend leisure patterns\n\n## 5. Time-Based Congestion Prediction Factors\n\n### 5.1 High Probability of Heavy Congestion\n- Weekday mornings 8:",
+    "type": "knowledge_base"
+  },
+  {
+    "id": "time_patterns_analysis_7",
+    "source": "time_patterns_analysis.txt",
+    "content": "bability of Heavy Congestion\n- Weekday mornings 8:00-9:30 AM\n- Weekday evenings 6:00-7:30 PM\n- Friday evenings\n- End of month weekdays\n- Day before major holidays\n\n### 5.2 Moderate Congestion Expected\n- Weekday midday\n- Saturday mornings/afternoons\n- Sunday evenings\n\n### 5.3 Light Congestion Expected\n- Late nights (after 10 PM)\n- Early mornings (before 7 AM)\n- Sunday mornings\n- Major holiday days\n\n## 6. Peak Spreading Phenomenon\n\nAs congestion increases, commuters adjust travel times:\n- Morning",
+    "type": "knowledge_base"
+  },
+  {
+    "id": "time_patterns_analysis_8",
+    "source": "time_patterns_analysis.txt",
+    "content": "creases, commuters adjust travel times:\n- Morning peak extends: 7:00 AM - 10:30 AM (vs traditional 8-10 AM)\n- Evening peak extends: 5:00 PM - 8:30 PM\n- This indicates system operating beyond design capacity\n\n## 7. Recommendations for Time-Based Analysis\n\n1. **Pattern Recognition**: Use historical data to establish baseline patterns\n2. **Anomaly Detection**: Flag deviations from expected patterns\n3. **Predictive Alerts**: Issue warnings before known peak periods\n4. **Demand Management**: Suggest",
+    "type": "knowledge_base"
+  },
+  {
+    "id": "time_patterns_analysis_9",
+    "source": "time_patterns_analysis.txt",
+    "content": "wn peak periods\n4. **Demand Management**: Suggest alternate travel times to users\n5. **Signal Optimization**: Adjust signal timing based on time-of-day patterns",
+    "type": "knowledge_base"
+  },
+  {
+    "id": "traffic_congestion_classification_0",
+    "source": "traffic_congestion_classification.txt",
+    "content": "# Traffic Congestion Classification and Analysis Guidelines\n\n## 1. Definition of Traffic Congestion\n\nTraffic congestion occurs when travel demand approaches or exceeds the available capacity of a road network. It is characterized by slower speeds, longer trip times, and increased vehicular queueing.\n\n## 2. Congestion Level Classification\n\n### 2.1 Light Congestion (0-30% capacity utilization)\n- **Characteristics**: Free-flowing traffic, minimal delays\n- **Average Speed**: Near posted speed limits",
+    "type": "knowledge_base"
+  },
+  {
+    "id": "traffic_congestion_classification_1",
+    "source": "traffic_congestion_classification.txt",
+    "content": "lays\n- **Average Speed**: Near posted speed limits\n- **Travel Time Index**: 1.0 - 1.1\n- **Operator Action**: No intervention required\n\n### 2.2 Moderate Congestion (30-60% capacity utilization)\n- **Characteristics**: Stable flow with some restrictions\n- **Average Speed**: 70-85% of free-flow speed\n- **Travel Time Index**: 1.1 - 1.3\n- **Operator Action**: Monitor for escalation\n\n### 2.3 Heavy Congestion (60-85% capacity utilization)\n- **Characteristics**: Unstable flow, frequent slowdowns\n- **Aver",
+    "type": "knowledge_base"
+  },
+  {
+    "id": "traffic_congestion_classification_2",
+    "source": "traffic_congestion_classification.txt",
+    "content": "tics**: Unstable flow, frequent slowdowns\n- **Average Speed**: 50-70% of free-flow speed\n- **Travel Time Index**: 1.3 - 1.5\n- **Operator Action**: Consider signal timing adjustments, issue alerts\n\n### 2.4 Severe Congestion (85-100% capacity utilization)\n- **Characteristics**: Breakdown conditions, stop-and-go traffic\n- **Average Speed**: Below 50% of free-flow speed\n- **Travel Time Index**: Above 1.5\n- **Operator Action**: Immediate intervention, alternate route advisories\n\n## 3. Travel Time Ind",
+    "type": "knowledge_base"
+  },
+  {
+    "id": "traffic_congestion_classification_3",
+    "source": "traffic_congestion_classification.txt",
+    "content": "alternate route advisories\n\n## 3. Travel Time Index (TTI)\n\nThe Travel Time Index represents how much longer a trip takes during congestion compared to free-flow conditions:\n\n- TTI = 1.0: No congestion (free flow)\n- TTI = 1.2: 20% longer travel time\n- TTI = 1.5: 50% longer travel time\n- TTI = 2.0: Double the normal travel time\n\n## 4. Road Capacity Utilization\n\nRoad capacity utilization indicates what percentage of maximum throughput is currently being used:\n\n- Below 70%: Road operating efficient",
+    "type": "knowledge_base"
+  },
+  {
+    "id": "traffic_congestion_classification_4",
+    "source": "traffic_congestion_classification.txt",
+    "content": "being used:\n\n- Below 70%: Road operating efficiently\n- 70-85%: Approaching capacity, sensitive to disruptions\n- 85-95%: Over-saturated, high probability of breakdown\n- Above 95%: Severe congestion, flow breakdown likely\n\n## 5. Congestion Duration Patterns\n\n### 5.1 Short-term Congestion (< 30 minutes)\nUsually caused by temporary disruptions like traffic signals or minor incidents.\n\n### 5.2 Medium-term Congestion (30 minutes - 2 hours)\nOften associated with peak hour patterns or moderate incidents",
+    "type": "knowledge_base"
+  },
+  {
+    "id": "traffic_congestion_classification_5",
+    "source": "traffic_congestion_classification.txt",
+    "content": "ated with peak hour patterns or moderate incidents.\n\n### 5.3 Long-term Congestion (> 2 hours)\nTypically caused by major incidents, road closures, or special events.\n\n## 6. Key Performance Indicators for Traffic Operators\n\n1. **Average Speed**: Direct measure of traffic flow quality\n2. **Volume-to-Capacity Ratio**: Indicates stress on road infrastructure\n3. **Queue Length**: Visual indicator of congestion severity\n4. **Incident Clearance Time**: Affects congestion duration\n5. **Travel Time Reliab",
+    "type": "knowledge_base"
+  },
+  {
+    "id": "traffic_congestion_classification_6",
+    "source": "traffic_congestion_classification.txt",
+    "content": "ffects congestion duration\n5. **Travel Time Reliability**: Consistency of journey times",
+    "type": "knowledge_base"
+  },
+  {
+    "id": "weather_impact_guidelines_0",
+    "source": "weather_impact_guidelines.txt",
+    "content": "# Weather Impact on Traffic Congestion\n\n## 1. Overview\n\nWeather conditions significantly affect traffic flow, driver behavior, and road safety. Understanding these impacts helps explain congestion causes and predict traffic patterns.\n\n## 2. Weather Condition Categories and Impacts\n\n### 2.1 Clear Weather\n- **Impact Level**: None\n- **Speed Reduction**: 0%\n- **Capacity Reduction**: 0%\n- **Description**: Optimal driving conditions with no weather-related impacts on traffic flow.\n\n### 2.2 Overcast/Cl",
+    "type": "knowledge_base"
+  },
+  {
+    "id": "weather_impact_guidelines_1",
+    "source": "weather_impact_guidelines.txt",
+    "content": "ated impacts on traffic flow.\n\n### 2.2 Overcast/Cloudy\n- **Impact Level**: Low\n- **Speed Reduction**: 0-5%\n- **Capacity Reduction**: 0-3%\n- **Description**: Minimal impact on traffic. May reduce visibility slightly during dawn/dusk.\n\n### 2.3 Light Rain\n- **Impact Level**: Moderate\n- **Speed Reduction**: 10-15%\n- **Capacity Reduction**: 5-10%\n- **Description**: Wet roads increase stopping distance. Drivers typically reduce speed voluntarily.\n\n### 2.4 Heavy Rain\n- **Impact Level**: High\n- **Speed",
+    "type": "knowledge_base"
+  },
+  {
+    "id": "weather_impact_guidelines_2",
+    "source": "weather_impact_guidelines.txt",
+    "content": "2.4 Heavy Rain\n- **Impact Level**: High\n- **Speed Reduction**: 25-40%\n- **Capacity Reduction**: 15-25%\n- **Description**: Significantly reduced visibility and road grip. Hydroplaning risk increases. Higher incident probability.\n\n### 2.5 Fog\n- **Impact Level**: High\n- **Speed Reduction**: 30-50%\n- **Capacity Reduction**: 20-35%\n- **Description**: Severely reduced visibility. Drivers maintain larger gaps. High-risk condition for multi-vehicle incidents.\n\n### 2.6 Windy Conditions\n- **Impact Level**",
+    "type": "knowledge_base"
+  },
+  {
+    "id": "weather_impact_guidelines_3",
+    "source": "weather_impact_guidelines.txt",
+    "content": "ents.\n\n### 2.6 Windy Conditions\n- **Impact Level**: Low to Moderate\n- **Speed Reduction**: 5-15%\n- **Capacity Reduction**: 5-10%\n- **Description**: Affects vehicle stability, especially for high-profile vehicles. May cause debris on roads.\n\n## 3. Weather-Related Congestion Patterns\n\n### 3.1 First Rain Effect\nWhen rain occurs after a dry spell, road surfaces become particularly slippery due to accumulated oil and dust. This causes:\n- 20-30% increase in incident rates\n- Extended congestion duratio",
+    "type": "knowledge_base"
+  },
+  {
+    "id": "weather_impact_guidelines_4",
+    "source": "weather_impact_guidelines.txt",
+    "content": "se in incident rates\n- Extended congestion duration\n- Unpredictable driver behavior\n\n### 3.2 Visibility-Related Slowdowns\nPoor visibility conditions (fog, heavy rain) cause:\n- Accordion effect (variable speeds)\n- Increased headway distances\n- Reduced effective road capacity\n\n### 3.3 Weather Transition Periods\nWhen weather changes rapidly:\n- Drivers may not adjust behavior quickly\n- Incident risk spikes during transitions\n- Congestion patterns become unpredictable\n\n## 4. Seasonal Patterns in Bang",
+    "type": "knowledge_base"
+  },
+  {
+    "id": "weather_impact_guidelines_5",
+    "source": "weather_impact_guidelines.txt",
+    "content": "ome unpredictable\n\n## 4. Seasonal Patterns in Bangalore\n\n### 4.1 Monsoon Season (June - September)\n- Frequent heavy rainfall\n- Waterlogging on roads\n- Extended congestion duration\n- Higher incident rates (30-40% increase)\n\n### 4.2 Winter Fog (December - January)\n- Early morning fog conditions\n- Visibility below 100 meters common\n- Peak hour delays extended\n- Recommended: Delayed departure advisories\n\n### 4.3 Summer (March - May)\n- Generally clear conditions\n- Heat-related vehicle breakdowns\n- Mi",
+    "type": "knowledge_base"
+  },
+  {
+    "id": "weather_impact_guidelines_6",
+    "source": "weather_impact_guidelines.txt",
+    "content": "conditions\n- Heat-related vehicle breakdowns\n- Minimal weather impact on congestion\n\n## 5. Recommendations for Weather-Related Congestion\n\n1. **Rain Advisory**: Issue speed reduction recommendations, increase signal green times\n2. **Fog Warning**: Activate fog lights at intersections, reduce speed limits\n3. **Storm Preparation**: Pre-position incident response teams, prepare alternate route plans\n4. **Real-time Updates**: Integrate weather data with traffic management systems\n\n## 6. Weather Dat",
+    "type": "knowledge_base"
+  },
+  {
+    "id": "weather_impact_guidelines_7",
+    "source": "weather_impact_guidelines.txt",
+    "content": "with traffic management systems\n\n## 6. Weather Data Integration Best Practices\n\n- Update weather conditions every 15 minutes\n- Use hyperlocal weather data when available\n- Correlate historical weather-congestion patterns\n- Include weather in congestion prediction models",
+    "type": "knowledge_base"
+  }
+]

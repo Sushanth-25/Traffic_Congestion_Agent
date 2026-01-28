@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traffic AI Assistant - IBM Hackathon</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Marked.js for Markdown Rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
+    <!-- Custom Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0f62fe',
+                        secondary: '#393939',
+                        ibm: {
+                            blue: '#0f62fe',
+                            darkblue: '#002d9c',
+                            gray: '#393939',
+                            lightgray: '#f4f4f4'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Custom scrollbar */
+        .chat-container::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .chat-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        .chat-container::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 3px;
+        }
+        
+        .chat-container::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        
+        /* Smooth message animation */
+        .message-fade-in {
+            animation: fadeIn 0.3s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Typing indicator animation */
+        .typing-indicator span {
+            animation: blink 1.4s infinite;
+        }
+        
+        .typing-indicator span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .typing-indicator span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        
+        @keyframes blink {
+            0%, 60%, 100% {
+                opacity: 0.3;
+            }
+            30% {
+                opacity: 1;
+            }
+        }
+        
+        /* Markdown content styles */
+        .markdown-content h1 { font-size: 1.5rem; font-weight: 700; margin-top: 1rem; margin-bottom: 0.5rem; }
+        .markdown-content h2 { font-size: 1.25rem; font-weight: 700; margin-top: 1rem; margin-bottom: 0.5rem; }
+        .markdown-content h3 { font-size: 1.1rem; font-weight: 600; margin-top: 0.75rem; margin-bottom: 0.25rem; }
+        .markdown-content p { margin-bottom: 0.5rem; }
+        .markdown-content strong { font-weight: 600; }
+        .markdown-content ul, .markdown-content ol { margin-left: 1.5rem; margin-bottom: 0.5rem; }
+        .markdown-content li { margin-bottom: 0.25rem; }
+        .markdown-content table { border-collapse: collapse; width: 100%; margin: 0.75rem 0; font-size: 0.875rem; }
+        .markdown-content th, .markdown-content td { border: 1px solid #d1d5db; padding: 0.5rem 0.75rem; text-align: left; }
+        .markdown-content th { background-color: #f3f4f6; font-weight: 600; }
+        .markdown-content tr:nth-child(even) { background-color: #f9fafb; }
+        .markdown-content code { background-color: #f3f4f6; padding: 0.125rem 0.25rem; border-radius: 0.25rem; font-size: 0.875rem; }
+        .markdown-content pre { background-color: #1f2937; color: #f9fafb; padding: 1rem; border-radius: 0.5rem; overflow-x: auto; margin: 0.5rem 0; }
+        .markdown-content blockquote { border-left: 4px solid #3b82f6; padding-left: 1rem; margin: 0.5rem 0; color: #6b7280; }
+    </style>
+    
+    <!-- Load Config First -->
+    <script src="config.js"></script>
+</head>
+<body class="bg-gray-50">
+    <!-- Main Container -->
+    <div class="flex flex-col h-screen max-w-7xl mx-auto">
+        
+        <!-- Header -->
+        <header class="bg-ibm-blue text-white shadow-lg">
+            <div class="container mx-auto px-4 py-4 md:py-6">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <svg class="w-8 h-8 md:w-10 md:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
+                        </svg>
+                        <div>
+                            <h1 class="text-xl md:text-2xl font-bold">Traffic AI Assistant</h1>
+                            <p class="text-xs md:text-sm text-blue-100">Powered by IBM watsonx & Langflow</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span id="connection-status" class="flex items-center text-xs md:text-sm">
+                            <span class="w-2 h-2 md:w-3 md:h-3 bg-green-400 rounded-full mr-2 animate-pulse"></span>
+                            Connected
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Chat Container -->
+        <main class="flex-1 overflow-hidden bg-white">
+            <div class="h-full max-w-6xl mx-auto flex flex-col">
+                
+                <!-- Messages Container -->
+                <div id="chat-messages" class="flex-1 overflow-y-auto p-4 md:p-6 space-y-4 chat-container">
+                    
+                    <!-- Welcome Message -->
+                    <div class="flex justify-center">
+                        <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 md:p-6 max-w-2xl text-center">
+                            <h2 class="text-lg md:text-xl font-semibold text-gray-800 mb-2">
+                                Welcome to Traffic AI Assistant! 🚦
+                            </h2>
+                            <p class="text-sm md:text-base text-gray-600">
+                                Ask me anything about Bangalore traffic patterns, incident management, 
+                                weather impacts, or urban mobility insights.
+                            </p>
+                            <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-2 text-xs md:text-sm">
+                                <button onclick="sendSampleQuery('What are the peak traffic hours in Bangalore?')" 
+                                        class="bg-white hover:bg-blue-50 text-gray-700 px-3 py-2 rounded-md border border-blue-200 transition">
+                                    📊 Peak traffic hours
+                                </button>
+                                <button onclick="sendSampleQuery('How does weather affect traffic congestion?')" 
+                                        class="bg-white hover:bg-blue-50 text-gray-700 px-3 py-2 rounded-md border border-blue-200 transition">
+                                    🌧️ Weather impact
+                                </button>
+                                <button onclick="sendSampleQuery('What is the current traffic status?')" 
+                                        class="bg-white hover:bg-blue-50 text-gray-700 px-3 py-2 rounded-md border border-blue-200 transition">
+                                    🚗 Current status
+                                </button>
+                                <button onclick="sendSampleQuery('Show me incident management guidelines')" 
+                                        class="bg-white hover:bg-blue-50 text-gray-700 px-3 py-2 rounded-md border border-blue-200 transition">
+                                    ⚠️ Incident guidelines
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+                <!-- Input Container -->
+                <div class="border-t bg-white p-4 md:p-6">
+                    <div class="max-w-4xl mx-auto">
+                        <form id="chat-form" class="flex items-end gap-2 md:gap-4">
+                            <div class="flex-1">
+                                <textarea 
+                                    id="user-input" 
+                                    rows="1"
+                                    placeholder="Ask about traffic conditions, incidents, or mobility insights..."
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-ibm-blue focus:border-transparent resize-none text-sm md:text-base"
+                                    style="max-height: 120px;"
+                                ></textarea>
+                            </div>
+                            <button 
+                                type="submit" 
+                                id="send-button"
+                                class="bg-ibm-blue hover:bg-ibm-darkblue text-white px-4 md:px-6 py-3 rounded-lg font-medium transition duration-200 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                            >
+                                <span class="hidden md:inline">Send</span>
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                                </svg>
+                            </button>
+                        </form>
+                        
+                        <!-- Helper Text -->
+                        <p class="text-xs text-gray-500 mt-2 text-center">
+                            Press Enter to send • Shift+Enter for new line
+                        </p>
+                    </div>
+                </div>
+                
+            </div>
+        </main>
+        
+    </div>
+    
+    <!-- JavaScript -->
+    <script src="app.js"></script>
+</body>
+</html>
