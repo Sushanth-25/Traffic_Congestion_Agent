@@ -1,0 +1,115 @@
+# Agentic AI System for Explainable Traffic Congestion Analysis
+
+## 🚦 Overview
+
+An explainable AI-powered traffic congestion analysis system built using **IBM Granite Model** and **LangFlow**. This system enhances transparency, trust, and usability of AI-driven traffic insights by providing human-readable explanations for congestion causes and patterns.
+
+## 🎯 Problem Statement
+
+Traffic operators often receive congestion alerts without sufficient explanation of underlying causes. This limits trust and effective decision-making. Our solution provides an explainable AI system that:
+- Detects congestion patterns
+- Explains contributing factors
+- Provides interpretable insights derived from traffic data
+
+## 🏗️ System Architecture
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                        USER INTERFACE                                │
+│                    (Traffic Operator Dashboard)                      │
+└─────────────────────────────────────────────────────────────────────┘
+                                   │
+                                   ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│                     LANGFLOW ORCHESTRATION                           │
+│                    (IBM Granite Model Core)                          │
+└─────────────────────────────────────────────────────────────────────┘
+           │                       │                       │
+           ▼                       ▼                       ▼
+┌─────────────────┐   ┌─────────────────┐   ┌─────────────────┐
+│  Traffic Data   │   │ Congestion Cause│   │   Explainable   │
+│ Analysis Agent  │   │  Analysis Agent │   │ Insight Assistant│
+└─────────────────┘   └─────────────────┘   └─────────────────┘
+           │                       │                       │
+           └───────────────────────┼───────────────────────┘
+                                   ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│                     RAG KNOWLEDGE BASE                               │
+│     (Traffic Engineering Literature & Urban Mobility Frameworks)     │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+## 🤖 AI Agents
+
+| Agent | Purpose |
+|-------|---------|
+| **Traffic Data Analysis Agent** | Synthesizes traffic data from multiple sources into comprehensive summaries |
+| **Congestion Cause Analysis Agent** | Correlates congestion patterns with time-of-day, incidents, weather, and volume changes |
+| **Explainable Insight Assistant** | Generates human-readable explanations for congestion causes and trends |
+
+## 🛠️ Tech Stack
+
+- **AI Model**: IBM Granite (via watsonx.ai)
+- **Orchestration**: LangFlow
+- **RAG**: Traffic engineering literature & urban mobility frameworks
+- **Cloud Platform**: IBM Cloud
+
+## 📁 Project Structure
+
+```
+IBM_Hackathon/
+├── docs/
+│   ├── REQUIREMENTS.md          # Detailed requirements
+│   ├── OBJECTIVES.md            # Project objectives & success criteria
+│   ├── ARCHITECTURE.md          # System architecture details
+│   └── API_REFERENCE.md         # API documentation
+├── src/
+│   ├── agents/                  # AI Agent implementations
+│   ├── rag/                     # RAG pipeline components
+│   ├── data/                    # Data processing modules
+│   └── utils/                   # Utility functions
+├── langflow/
+│   └── flows/                   # LangFlow flow definitions
+├── data/
+│   ├── raw/                     # Raw traffic data
+│   ├── processed/               # Processed datasets
+│   └── knowledge_base/          # RAG documents
+├── tests/                       # Test cases
+├── deployment/                  # Deployment configurations
+├── presentation/                # PPT and demo materials
+└── README.md
+```
+
+## 🚀 Quick Start
+
+```bash
+# Clone the repository
+git clone <repository-url>
+cd IBM_Hackathon
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Set up IBM Cloud credentials
+cp .env.example .env
+# Edit .env with your IBM Cloud API keys
+
+# Run the application
+python src/main.py
+```
+
+## 📖 Documentation
+
+- [Requirements](docs/REQUIREMENTS.md)
+- [Objectives](docs/OBJECTIVES.md)
+- [Architecture](docs/ARCHITECTURE.md)
+
+## 👥 Team
+
+- Team Member 1 (Team Lead)
+- Team Member 2 
+- Team Member 3
+
+## 📄 License
+
+This project is developed for IBM Hackathon 2026.

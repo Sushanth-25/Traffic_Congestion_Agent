@@ -1,0 +1,68 @@
+# Traffic Congestion Classification and Analysis Guidelines
+
+## 1. Definition of Traffic Congestion
+
+Traffic congestion occurs when travel demand approaches or exceeds the available capacity of a road network. It is characterized by slower speeds, longer trip times, and increased vehicular queueing.
+
+## 2. Congestion Level Classification
+
+### 2.1 Light Congestion (0-30% capacity utilization)
+- **Characteristics**: Free-flowing traffic, minimal delays
+- **Average Speed**: Near posted speed limits
+- **Travel Time Index**: 1.0 - 1.1
+- **Operator Action**: No intervention required
+
+### 2.2 Moderate Congestion (30-60% capacity utilization)
+- **Characteristics**: Stable flow with some restrictions
+- **Average Speed**: 70-85% of free-flow speed
+- **Travel Time Index**: 1.1 - 1.3
+- **Operator Action**: Monitor for escalation
+
+### 2.3 Heavy Congestion (60-85% capacity utilization)
+- **Characteristics**: Unstable flow, frequent slowdowns
+- **Average Speed**: 50-70% of free-flow speed
+- **Travel Time Index**: 1.3 - 1.5
+- **Operator Action**: Consider signal timing adjustments, issue alerts
+
+### 2.4 Severe Congestion (85-100% capacity utilization)
+- **Characteristics**: Breakdown conditions, stop-and-go traffic
+- **Average Speed**: Below 50% of free-flow speed
+- **Travel Time Index**: Above 1.5
+- **Operator Action**: Immediate intervention, alternate route advisories
+
+## 3. Travel Time Index (TTI)
+
+The Travel Time Index represents how much longer a trip takes during congestion compared to free-flow conditions:
+
+- TTI = 1.0: No congestion (free flow)
+- TTI = 1.2: 20% longer travel time
+- TTI = 1.5: 50% longer travel time
+- TTI = 2.0: Double the normal travel time
+
+## 4. Road Capacity Utilization
+
+Road capacity utilization indicates what percentage of maximum throughput is currently being used:
+
+- Below 70%: Road operating efficiently
+- 70-85%: Approaching capacity, sensitive to disruptions
+- 85-95%: Over-saturated, high probability of breakdown
+- Above 95%: Severe congestion, flow breakdown likely
+
+## 5. Congestion Duration Patterns
+
+### 5.1 Short-term Congestion (< 30 minutes)
+Usually caused by temporary disruptions like traffic signals or minor incidents.
+
+### 5.2 Medium-term Congestion (30 minutes - 2 hours)
+Often associated with peak hour patterns or moderate incidents.
+
+### 5.3 Long-term Congestion (> 2 hours)
+Typically caused by major incidents, road closures, or special events.
+
+## 6. Key Performance Indicators for Traffic Operators
+
+1. **Average Speed**: Direct measure of traffic flow quality
+2. **Volume-to-Capacity Ratio**: Indicates stress on road infrastructure
+3. **Queue Length**: Visual indicator of congestion severity
+4. **Incident Clearance Time**: Affects congestion duration
+5. **Travel Time Reliability**: Consistency of journey times
