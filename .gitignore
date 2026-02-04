@@ -63,3 +63,26 @@ htmlcov/
 # LangFlow
 *.langflow
 langflow_cache/
+Frontend/config.js
+# Node modules
+node_modules/
+
+# Environment variables
+.env
+.env.local
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Temporary files
+*.tmp
+*.temp
