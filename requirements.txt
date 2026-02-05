@@ -1,22 +1,40 @@
 # ==============================================
 # IBM Hackathon - Traffic Congestion Analysis
+# FINAL ROUND - ENHANCED REQUIREMENTS
 # ==============================================
 # Note: LangFlow is used via Astra DataStax (hosted)
-# No need to install langflow or langchain locally
 # ==============================================
 
-# IBM watsonx SDK (for custom scripts if needed)
+# ============ CORE IBM INTEGRATION ============
 ibm-watsonx-ai>=0.2.0
 
-# Data Processing (Required for dataset handling)
+# ============ API SERVER (FastAPI) ============
+fastapi>=0.109.0
+uvicorn[standard]>=0.27.0
+httpx>=0.26.0
+
+# ============ DATA PROCESSING ============
 pandas>=2.0.0
 numpy>=1.24.0
 
-# Utilities
-python-dotenv>=1.0.0
+# ============ LIVE DATA APIs ============
 requests>=2.31.0
+aiohttp>=3.9.0
+
+# ============ UTILITIES ============
+python-dotenv>=1.0.0
 python-dateutil>=2.8.0
 
-# Development & Testing (Optional)
+# ============ VISUALIZATION (Optional) ============
+# plotly>=5.18.0
+# folium>=0.15.0
+
+# ============ DEVELOPMENT & TESTING ============
 pytest>=7.4.0
+pytest-asyncio>=0.23.0
 black>=23.0.0
+
+# ============ OPTIONAL ENHANCEMENTS ============
+# streamlit>=1.30.0  # For alternative dashboard
+# gradio>=4.0.0      # For quick demo interface
+

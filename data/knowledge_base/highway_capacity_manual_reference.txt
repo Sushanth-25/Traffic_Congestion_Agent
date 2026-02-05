@@ -1,0 +1,135 @@
+# Highway Capacity Manual (HCM) Standards Reference
+
+## Overview
+This document provides key concepts from the Highway Capacity Manual (HCM) 2022,
+the authoritative reference for traffic capacity and level-of-service analysis.
+
+## 1. Level of Service (LOS) Definitions
+
+### LOS A - Free Flow
+- Volume-to-Capacity Ratio: 0.00 - 0.35
+- Average Speed: > 90% of free-flow speed
+- Characteristics: Drivers can maintain desired speeds, no delays
+- Traffic Density: ≤ 11 pc/mi/ln
+
+### LOS B - Reasonably Free Flow
+- Volume-to-Capacity Ratio: 0.35 - 0.54
+- Average Speed: > 70% of free-flow speed
+- Characteristics: Slight reduction in maneuverability
+- Traffic Density: 11-18 pc/mi/ln
+
+### LOS C - Stable Flow
+- Volume-to-Capacity Ratio: 0.54 - 0.77
+- Average Speed: > 50% of free-flow speed
+- Characteristics: Noticeable restriction in maneuverability
+- Traffic Density: 18-26 pc/mi/ln
+
+### LOS D - Approaching Unstable Flow
+- Volume-to-Capacity Ratio: 0.77 - 0.93
+- Average Speed: 40-50% of free-flow speed
+- Characteristics: Limited ability to maneuver, minor incidents cause queuing
+- Traffic Density: 26-35 pc/mi/ln
+
+### LOS E - Unstable Flow (At Capacity)
+- Volume-to-Capacity Ratio: 0.93 - 1.00
+- Average Speed: 25-40% of free-flow speed
+- Characteristics: Operating at capacity, no gaps for maneuvers
+- Traffic Density: 35-45 pc/mi/ln
+
+### LOS F - Forced/Breakdown Flow
+- Volume-to-Capacity Ratio: > 1.00
+- Average Speed: < 25% of free-flow speed
+- Characteristics: Stop-and-go conditions, queue formation
+- Traffic Density: > 45 pc/mi/ln
+
+## 2. Capacity Concepts
+
+### Theoretical Capacity
+Maximum number of vehicles that can pass a point in one hour under ideal conditions:
+- Freeway: 2,400 pc/hr/ln (passenger cars per hour per lane)
+- Multi-lane Highway: 2,200 pc/hr/ln
+- Two-lane Highway: 1,700 pc/hr (both directions combined)
+- Signalized Intersection: 1,800 veh/hr/ln (ideal saturation flow)
+
+### Practical Capacity
+Adjusted for:
+- Heavy vehicle percentage
+- Grade conditions
+- Lane width
+- Lateral clearance
+- Driver population (commuter vs. recreational)
+
+## 3. Delay Analysis at Signalized Intersections
+
+### Control Delay Components
+1. **Deceleration Delay**: Time lost slowing down
+2. **Queue Move-up Delay**: Time in queue behind other vehicles
+3. **Stopped Delay**: Time completely stopped
+4. **Acceleration Delay**: Time lost speeding up
+
+### LOS Criteria for Signalized Intersections
+| LOS | Control Delay (sec/veh) |
+|-----|------------------------|
+| A   | ≤ 10                   |
+| B   | > 10 and ≤ 20          |
+| C   | > 20 and ≤ 35          |
+| D   | > 35 and ≤ 55          |
+| E   | > 55 and ≤ 80          |
+| F   | > 80                   |
+
+## 4. Travel Time Reliability Metrics
+
+### Travel Time Index (TTI)
+Ratio of actual travel time to free-flow travel time:
+- TTI = 1.0: Free flow (no congestion)
+- TTI = 1.3: 30% longer than free flow (moderate congestion)
+- TTI = 1.5: 50% longer (heavy congestion)
+- TTI ≥ 2.0: Double travel time (severe congestion)
+
+### Planning Time Index (PTI)
+95th percentile travel time divided by free-flow time:
+- Accounts for worst-case scenarios
+- Used for trip planning with high reliability needs
+
+### Buffer Index
+Extra time needed to ensure on-time arrival:
+Buffer = (95th percentile time - average time) / average time
+
+## 5. Queue Analysis
+
+### Queue Length Estimation
+For oversaturated conditions:
+Q = (arrival rate - capacity) × duration
+
+### Queue Dissipation Time
+Time for queue to clear after demand drops below capacity:
+T_clear = Q / (capacity - reduced demand rate)
+
+## 6. Application to Bangalore Context
+
+### Typical Bangalore Corridor Metrics
+- Peak Hour Factor: 0.85-0.95
+- Heavy Vehicle Percentage: 5-15%
+- Pedestrian Interference Factor: High (reduces capacity 10-20%)
+- Signal Coordination: Variable (often suboptimal)
+
+### Bangalore-Specific Adjustments
+1. Two-wheeler dominance: Increases PCU capacity
+2. Mixed traffic: Reduces overall efficiency
+3. Encroachments: Reduces effective lane width
+4. Bus stops without bays: Creates bottlenecks
+
+## 7. Congestion Metrics Summary
+
+| Metric | Formula | Interpretation |
+|--------|---------|----------------|
+| V/C Ratio | Volume ÷ Capacity | > 1.0 indicates oversaturation |
+| TTI | Actual Time ÷ Free Flow Time | Higher = more congestion |
+| Delay | Actual - Expected Time | Seconds of excess travel |
+| Queue | Vehicles waiting | Higher = more severe |
+| Speed | Distance ÷ Time | Lower = more congestion |
+
+---
+Source: Highway Capacity Manual, 7th Edition (2022)
+Transportation Research Board, National Academies
+

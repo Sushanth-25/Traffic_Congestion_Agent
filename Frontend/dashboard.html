@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traffic AI Dashboard - IBM Hackathon 2026</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Chart.js for visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Marked.js for Markdown -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <!-- Leaflet.js for Maps -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ibm: {
+                            blue: '#0f62fe',
+                            darkblue: '#002d9c',
+                            cyan: '#1192e8',
+                            teal: '#009d9a',
+                            green: '#198038',
+                            yellow: '#f1c21b',
+                            orange: '#ff832b',
+                            red: '#da1e28',
+                            purple: '#8a3ffc',
+                            gray: '#393939',
+                            lightgray: '#f4f4f4'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #888; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #555; }
+
+        /* Animations */
+        .fade-in { animation: fadeIn 0.3s ease-in; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .pulse-dot {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Typing indicator */
+        .typing-dot { animation: blink 1.4s infinite; }
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes blink {
+            0%, 60%, 100% { opacity: 0.3; }
+            30% { opacity: 1; }
+        }
+
+        /* Map container */
+        #traffic-map { height: 300px; border-radius: 8px; }
+
+        /* Confidence gauge */
+        .gauge-container {
+            position: relative;
+            width: 120px;
+            height: 60px;
+            overflow: hidden;
+        }
+        .gauge-bg {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            border-radius: 60px 60px 0 0;
+            background: linear-gradient(90deg, #da1e28 0%, #f1c21b 50%, #198038 100%);
+        }
+        .gauge-center {
+            position: absolute;
+            bottom: 0;
+            left: 15px;
+            width: 90px;
+            height: 45px;
+            background: white;
+            border-radius: 45px 45px 0 0;
+        }
+        .gauge-needle {
+            position: absolute;
+            bottom: 5px;
+            left: 57px;
+            width: 4px;
+            height: 40px;
+            background: #393939;
+            transform-origin: bottom center;
+            border-radius: 2px;
+            transition: transform 0.5s ease-out;
+        }
+
+        /* Factor bars */
+        .factor-bar {
+            transition: width 0.5s ease-out;
+        }
+
+        /* Markdown content styles */
+        .markdown-content h1 { font-size: 1.5rem; font-weight: 700; margin: 1rem 0 0.5rem; }
+        .markdown-content h2 { font-size: 1.25rem; font-weight: 700; margin: 1rem 0 0.5rem; }
+        .markdown-content h3 { font-size: 1.1rem; font-weight: 600; margin: 0.75rem 0 0.25rem; }
+        .markdown-content p { margin-bottom: 0.5rem; }
+        .markdown-content strong { font-weight: 600; }
+        .markdown-content ul, .markdown-content ol { margin-left: 1.5rem; margin-bottom: 0.5rem; }
+        .markdown-content li { margin-bottom: 0.25rem; }
+        .markdown-content table { border-collapse: collapse; width: 100%; margin: 0.75rem 0; }
+        .markdown-content th, .markdown-content td { border: 1px solid #d1d5db; padding: 0.5rem; text-align: left; }
+        .markdown-content th { background-color: #f3f4f6; font-weight: 600; }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+    <!-- Header -->
+    <header class="bg-ibm-gray text-white py-3 px-6 shadow-lg">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <div class="w-10 h-10 bg-ibm-blue rounded-lg flex items-center justify-center">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold">Traffic AI Dashboard</h1>
+                    <p class="text-xs text-gray-400">Powered by IBM Granite & watsonx.ai</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <div id="live-indicator" class="flex items-center gap-2 bg-green-900/30 px-3 py-1 rounded-full">
+                    <span class="w-2 h-2 bg-green-500 rounded-full pulse-dot"></span>
+                    <span class="text-sm text-green-400">Live Data</span>
+                </div>
+                <div id="weather-badge" class="flex items-center gap-2 bg-blue-900/30 px-3 py-1 rounded-full">
+                    <span class="text-sm">🌤️ 26°C</span>
+                </div>
+                <div class="text-sm text-gray-400" id="current-time">--:--</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto p-4 grid grid-cols-1 lg:grid-cols-3 gap-4">
+
+        <!-- Left Column: Chat Interface -->
+        <div class="lg:col-span-2 flex flex-col bg-white rounded-xl shadow-lg overflow-hidden" style="height: calc(100vh - 140px);">
+
+            <!-- Chat Header -->
+            <div class="bg-ibm-blue text-white px-4 py-3 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
+                        <span class="text-lg">🤖</span>
+                    </div>
+                    <div>
+                        <h2 class="font-semibold">Explainable Traffic Assistant</h2>
+                        <p class="text-xs text-blue-200">Ask me about traffic conditions in Bangalore</p>
+                    </div>
+                </div>
+                <button onclick="clearChat()" class="text-sm bg-white/10 hover:bg-white/20 px-3 py-1 rounded transition">
+                    Clear Chat
+                </button>
+            </div>
+
+            <!-- Chat Messages -->
+            <div id="chat-messages" class="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
+                <!-- Welcome Message -->
+                <div class="flex justify-start fade-in">
+                    <div class="max-w-[85%] bg-white rounded-lg shadow-sm px-4 py-3 border-l-4 border-ibm-blue">
+                        <p class="text-gray-800 mb-2">👋 Welcome to the <strong>Explainable Traffic AI</strong> system!</p>
+                        <p class="text-gray-600 text-sm mb-3">I can help you understand traffic conditions in Bangalore with clear explanations and real-time data.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <button onclick="sendQuickQuery('What\\'s the current traffic at Silk Board?')" class="text-xs bg-ibm-blue/10 text-ibm-blue px-3 py-1 rounded-full hover:bg-ibm-blue/20 transition">
+                                🚦 Silk Board Status
+                            </button>
+                            <button onclick="sendQuickQuery('Why is Koramangala congested right now?')" class="text-xs bg-ibm-blue/10 text-ibm-blue px-3 py-1 rounded-full hover:bg-ibm-blue/20 transition">
+                                🔍 Why Koramangala?
+                            </button>
+                            <button onclick="sendQuickQuery('Explain how weather is affecting traffic today')" class="text-xs bg-ibm-blue/10 text-ibm-blue px-3 py-1 rounded-full hover:bg-ibm-blue/20 transition">
+                                🌧️ Weather Impact
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Input -->
+            <div class="p-4 bg-white border-t">
+                <form id="chat-form" class="flex gap-3">
+                    <input
+                        type="text"
+                        id="user-input"
+                        placeholder="Ask about traffic conditions..."
+                        class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-ibm-blue focus:border-transparent"
+                        autocomplete="off"
+                    >
+                    <button
+                        type="submit"
+                        id="send-button"
+                        class="px-6 py-3 bg-ibm-blue text-white rounded-lg hover:bg-ibm-darkblue transition flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                        <span>Send</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                        </svg>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Right Column: Dashboard Panels -->
+        <div class="space-y-4">
+
+            <!-- Confidence Score Panel -->
+            <div class="bg-white rounded-xl shadow-lg p-4">
+                <h3 class="font-semibold text-gray-700 mb-3 flex items-center gap-2">
+                    <span>📊</span> Analysis Confidence
+                </h3>
+                <div class="flex items-center justify-center mb-2">
+                    <div class="gauge-container">
+                        <div class="gauge-bg"></div>
+                        <div class="gauge-center"></div>
+                        <div class="gauge-needle" id="confidence-needle" style="transform: rotate(-90deg);"></div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <span id="confidence-value" class="text-3xl font-bold text-gray-800">--%</span>
+                    <span id="confidence-grade" class="ml-2 px-2 py-1 bg-gray-200 rounded text-sm">--</span>
+                </div>
+                <div class="mt-3 space-y-2 text-sm">
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Data Quality</span>
+                        <span id="conf-data-quality" class="font-medium">--%</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Source Reliability</span>
+                        <span id="conf-source" class="font-medium">--%</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Pattern Match</span>
+                        <span id="conf-pattern" class="font-medium">--%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Factor Attribution Panel -->
+            <div class="bg-white rounded-xl shadow-lg p-4">
+                <h3 class="font-semibold text-gray-700 mb-3 flex items-center gap-2">
+                    <span>🔍</span> Contributing Factors
+                </h3>
+                <div id="factors-container" class="space-y-3">
+                    <p class="text-gray-500 text-sm text-center py-4">Ask a question to see factor analysis</p>
+                </div>
+            </div>
+
+            <!-- Quick Status Panel -->
+            <div class="bg-white rounded-xl shadow-lg p-4">
+                <h3 class="font-semibold text-gray-700 mb-3 flex items-center gap-2">
+                    <span>🚦</span> Area Status
+                </h3>
+                <div id="area-status" class="grid grid-cols-2 gap-2">
+                    <div class="status-badge bg-red-100 text-red-800 px-2 py-1 rounded text-xs text-center">
+                        Silk Board: Severe
+                    </div>
+                    <div class="status-badge bg-orange-100 text-orange-800 px-2 py-1 rounded text-xs text-center">
+                        Koramangala: Heavy
+                    </div>
+                    <div class="status-badge bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs text-center">
+                        Whitefield: Moderate
+                    </div>
+                    <div class="status-badge bg-green-100 text-green-800 px-2 py-1 rounded text-xs text-center">
+                        Jayanagar: Light
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mini Map -->
+            <div class="bg-white rounded-xl shadow-lg p-4">
+                <h3 class="font-semibold text-gray-700 mb-3 flex items-center gap-2">
+                    <span>🗺️</span> Bangalore Traffic Map
+                </h3>
+                <div id="traffic-map"></div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Configuration (loaded from config.js) -->
+    <script src="config.js"></script>
+
+    <!-- Main Application Logic -->
+    <script>
+        // Configuration
+        const CONFIG = {
+            LANGFLOW_API_URL: typeof LANGFLOW_CONFIG !== 'undefined' ? LANGFLOW_CONFIG.apiUrl : '',
+            FLOW_ID: typeof LANGFLOW_CONFIG !== 'undefined' ? LANGFLOW_CONFIG.flowId : '',
+            APPLICATION_TOKEN: typeof LANGFLOW_CONFIG !== 'undefined' ? LANGFLOW_CONFIG.applicationToken : '',
+            ORGANIZATION_ID: typeof LANGFLOW_CONFIG !== 'undefined' ? LANGFLOW_CONFIG.organizationId : '',
+            LOCAL_API_URL: 'http://localhost:8001'  // Our FastAPI server
+        };
+
+        // State
+        const state = {
+            isProcessing: false,
+            lastAnalysis: null,
+            map: null
+        };
+
+        // DOM Elements
+        const chatMessages = document.getElementById('chat-messages');
+        const chatForm = document.getElementById('chat-form');
+        const userInput = document.getElementById('user-input');
+        const sendButton = document.getElementById('send-button');
+
+        // Initialize
+        function init() {
+            chatForm.addEventListener('submit', handleSubmit);
+            userInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    chatForm.dispatchEvent(new Event('submit'));
+                }
+            });
+
+            updateTime();
+            setInterval(updateTime, 1000);
+
+            initMap();
+            fetchAreaStatus();
+
+            console.log('🚀 Traffic AI Dashboard initialized');
+        }
+
+        // Update current time
+        function updateTime() {
+            const now = new Date();
+            document.getElementById('current-time').textContent = now.toLocaleTimeString('en-IN', {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        // Initialize Leaflet map
+        function initMap() {
+            state.map = L.map('traffic-map').setView([12.9716, 77.5946], 11);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap'
+            }).addTo(state.map);
+
+            // Add markers for key areas
+            const areas = {
+                'Silk Board': [12.9172, 77.6227, 'red'],
+                'Koramangala': [12.9352, 77.6245, 'orange'],
+                'Whitefield': [12.9698, 77.7500, 'yellow'],
+                'M.G. Road': [12.9756, 77.6063, 'orange'],
+                'Electronic City': [12.8399, 77.6770, 'green']
+            };
+
+            Object.entries(areas).forEach(([name, [lat, lng, color]]) => {
+                const marker = L.circleMarker([lat, lng], {
+                    radius: 8,
+                    fillColor: color,
+                    color: '#fff',
+                    weight: 2,
+                    fillOpacity: 0.8
+                }).addTo(state.map);
+                marker.bindPopup(`<b>${name}</b>`);
+            });
+        }
+
+        // Fetch area status
+        async function fetchAreaStatus() {
+            try {
+                const response = await fetch(`${CONFIG.LOCAL_API_URL}/all-areas-status`);
+                if (response.ok) {
+                    const data = await response.json();
+                    updateAreaStatus(data);
+                }
+            } catch (error) {
+                console.log('Using simulated area status');
+            }
+        }
+
+        // Update area status badges
+        function updateAreaStatus(data) {
+            const container = document.getElementById('area-status');
+            container.innerHTML = '';
+
+            const colorMap = {
+                'Light': 'bg-green-100 text-green-800',
+                'Moderate': 'bg-yellow-100 text-yellow-800',
+                'Heavy': 'bg-orange-100 text-orange-800',
+                'Severe': 'bg-red-100 text-red-800'
+            };
+
+            Object.entries(data).slice(0, 6).forEach(([area, info]) => {
+                const category = info.category || 'Moderate';
+                const badge = document.createElement('div');
+                badge.className = `${colorMap[category]} px-2 py-1 rounded text-xs text-center`;
+                badge.textContent = `${area}: ${category}`;
+                container.appendChild(badge);
+            });
+        }
+
+        // Handle form submission
+        async function handleSubmit(e) {
+            e.preventDefault();
+            const message = userInput.value.trim();
+            if (!message || state.isProcessing) return;
+
+            userInput.value = '';
+            await sendMessage(message);
+        }
+
+        // Quick query buttons
+        function sendQuickQuery(query) {
+            userInput.value = query;
+            chatForm.dispatchEvent(new Event('submit'));
+        }
+
+        // Send message
+        async function sendMessage(message) {
+            addMessageToChat(message, 'user');
+            state.isProcessing = true;
+            sendButton.disabled = true;
+
+            const typingId = showTypingIndicator();
+
+            try {
+                // Try to get context from local API first
+                let localContext = '';
+                try {
+                    const areaMatch = message.match(/silk board|koramangala|whitefield|marathahalli|m\.?g\.? road|electronic city|indiranagar|hebbal|jayanagar/i);
+                    if (areaMatch) {
+                        const area = areaMatch[0].replace(/\./g, '').replace(/ /g, '-');
+                        const contextResponse = await fetch(`${CONFIG.LOCAL_API_URL}/langflow/${area}`);
+                        if (contextResponse.ok) {
+                            const contextData = await contextResponse.json();
+                            localContext = contextData.context_for_prompt;
+                            updateVisualization(contextData);
+                        }
+                    }
+                } catch (e) {
+                    console.log('Local API not available, using LangFlow only');
+                }
+
+                // Call LangFlow API
+                const response = await callLangflowAPI(message, localContext);
+                removeTypingIndicator(typingId);
+
+                if (response && response.outputs && response.outputs.length > 0) {
+                    const aiMessage = extractMessageFromOutput(response.outputs[0]);
+                    addMessageToChat(aiMessage, 'ai');
+                } else {
+                    throw new Error('Invalid response format');
+                }
+
+            } catch (error) {
+                console.error('Error:', error);
+                removeTypingIndicator(typingId);
+                addMessageToChat(`Sorry, I encountered an error: ${error.message}`, 'error');
+            } finally {
+                state.isProcessing = false;
+                sendButton.disabled = false;
+                userInput.focus();
+            }
+        }
+
+        // Call LangFlow API
+        async function callLangflowAPI(message, additionalContext = '') {
+            const endpoint = `${CONFIG.LANGFLOW_API_URL}/${CONFIG.FLOW_ID}`;
+
+            let fullMessage = message;
+            if (additionalContext) {
+                fullMessage = `LIVE DATA CONTEXT:\n${additionalContext}\n\nUSER QUESTION: ${message}`;
+            }
+
+            const payload = {
+                input_value: fullMessage,
+                output_type: "chat",
+                input_type: "chat"
+            };
+
+            const response = await fetch(endpoint, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${CONFIG.APPLICATION_TOKEN}`,
+                    'X-DataStax-Current-Org': CONFIG.ORGANIZATION_ID
+                },
+                body: JSON.stringify(payload)
+            });
+
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            return await response.json();
+        }
+
+        // Extract message from output
+        function extractMessageFromOutput(output) {
+            if (output.results?.message?.text) return output.results.message.text;
+            if (output.results?.message?.data?.text) return output.results.message.data.text;
+            if (output.outputs?.message?.message) return output.outputs.message.message;
+            if (output.artifacts?.message) return output.artifacts.message;
+            if (output.messages?.[0]?.message) return output.messages[0].message;
+            return 'Could not extract response.';
+        }
+
+        // Update visualization panels
+        function updateVisualization(data) {
+            if (!data) return;
+
+            // Update confidence gauge
+            const confidence = data.confidence || 0.75;
+            updateConfidenceGauge(confidence);
+
+            // Update factors (simulated for now)
+            updateFactors([
+                { name: 'Time Pattern', pct: 35, color: 'ibm-blue' },
+                { name: 'Weather', pct: 25, color: 'ibm-cyan' },
+                { name: 'Volume', pct: 30, color: 'ibm-teal' },
+                { name: 'Incidents', pct: 10, color: 'ibm-purple' }
+            ]);
+        }
+
+        // Update confidence gauge
+        function updateConfidenceGauge(confidence) {
+            const angle = -90 + (confidence * 180);
+            document.getElementById('confidence-needle').style.transform = `rotate(${angle}deg)`;
+            document.getElementById('confidence-value').textContent = `${Math.round(confidence * 100)}%`;
+
+            const grade = confidence >= 0.85 ? 'A' : confidence >= 0.7 ? 'B' : confidence >= 0.55 ? 'C' : 'D';
+            const gradeColors = { A: 'bg-green-500', B: 'bg-blue-500', C: 'bg-yellow-500', D: 'bg-red-500' };
+            const gradeEl = document.getElementById('confidence-grade');
+            gradeEl.textContent = `Grade ${grade}`;
+            gradeEl.className = `ml-2 px-2 py-1 rounded text-sm text-white ${gradeColors[grade]}`;
+
+            document.getElementById('conf-data-quality').textContent = `${Math.round(confidence * 95)}%`;
+            document.getElementById('conf-source').textContent = `${Math.round(confidence * 100)}%`;
+            document.getElementById('conf-pattern').textContent = `${Math.round(confidence * 90)}%`;
+        }
+
+        // Update factors visualization
+        function updateFactors(factors) {
+            const container = document.getElementById('factors-container');
+            container.innerHTML = '';
+
+            const colors = {
+                'ibm-blue': '#0f62fe',
+                'ibm-cyan': '#1192e8',
+                'ibm-teal': '#009d9a',
+                'ibm-purple': '#8a3ffc',
+                'ibm-green': '#198038'
+            };
+
+            factors.forEach(factor => {
+                const div = document.createElement('div');
+                div.innerHTML = `
+                    <div class="flex justify-between text-sm mb-1">
+                        <span class="text-gray-700">${factor.name}</span>
+                        <span class="font-medium">${factor.pct}%</span>
+                    </div>
+                    <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+                        <div class="factor-bar h-full rounded-full" style="width: ${factor.pct}%; background-color: ${colors[factor.color] || '#0f62fe'}"></div>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        // Add message to chat
+        function addMessageToChat(message, type) {
+            const div = document.createElement('div');
+            div.className = `flex ${type === 'user' ? 'justify-end' : 'justify-start'} fade-in`;
+
+            const bubble = document.createElement('div');
+            const baseClasses = 'max-w-[85%] rounded-lg px-4 py-3';
+
+            if (type === 'user') {
+                bubble.className = `${baseClasses} bg-ibm-blue text-white`;
+                bubble.textContent = message;
+            } else if (type === 'error') {
+                bubble.className = `${baseClasses} bg-red-100 text-red-800 border border-red-300`;
+                bubble.textContent = message;
+            } else {
+                bubble.className = `${baseClasses} bg-white shadow-sm border-l-4 border-ibm-blue markdown-content`;
+                bubble.innerHTML = marked.parse(message);
+
+                // Simulate updating visualization
+                updateConfidenceGauge(0.85);
+                updateFactors([
+                    { name: 'Time Pattern', pct: 35, color: 'ibm-blue' },
+                    { name: 'Weather Impact', pct: 20, color: 'ibm-cyan' },
+                    { name: 'Traffic Volume', pct: 30, color: 'ibm-teal' },
+                    { name: 'Incidents', pct: 15, color: 'ibm-purple' }
+                ]);
+            }
+
+            div.appendChild(bubble);
+            chatMessages.appendChild(div);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Typing indicator
+        function showTypingIndicator() {
+            const id = 'typing-' + Date.now();
+            const div = document.createElement('div');
+            div.id = id;
+            div.className = 'flex justify-start fade-in';
+            div.innerHTML = `
+                <div class="bg-white rounded-lg px-4 py-3 shadow-sm flex items-center gap-1">
+                    <span class="typing-dot w-2 h-2 bg-gray-400 rounded-full"></span>
+                    <span class="typing-dot w-2 h-2 bg-gray-400 rounded-full"></span>
+                    <span class="typing-dot w-2 h-2 bg-gray-400 rounded-full"></span>
+                </div>
+            `;
+            chatMessages.appendChild(div);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            return id;
+        }
+
+        function removeTypingIndicator(id) {
+            const el = document.getElementById(id);
+            if (el) el.remove();
+        }
+
+        // Clear chat
+        function clearChat() {
+            chatMessages.innerHTML = `
+                <div class="flex justify-start fade-in">
+                    <div class="max-w-[85%] bg-white rounded-lg shadow-sm px-4 py-3 border-l-4 border-ibm-blue">
+                        <p class="text-gray-800">Chat cleared. How can I help you with traffic analysis?</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
+
