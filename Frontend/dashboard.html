@@ -315,7 +315,7 @@
             FLOW_ID: typeof LANGFLOW_CONFIG !== 'undefined' ? LANGFLOW_CONFIG.flowId : 'e41bb74e-e873-4391-9bb8-dd2fb329167c',
             APPLICATION_TOKEN: typeof LANGFLOW_CONFIG !== 'undefined' ? LANGFLOW_CONFIG.applicationToken : 'sk-MsGldUXxeOd0Zc5kPbu_gdBUtxnYmzNbXSwqvMd_xxc',
             LOCAL_API_URL: 'http://localhost:8001',  // Our FastAPI server
-            USE_DIRECT_API: true  // Set to true to bypass LangFlow and use API directly for testing
+            USE_DIRECT_API: false  // Set to false to use LangFlow (proper hackathon demo)
         };
 
         // State
@@ -540,15 +540,18 @@ ${data.context_for_prompt || 'Data not available'}
                 input_type: "chat"
             };
 
-            // Headers for local LangFlow (no authentication needed)
+            // Headers for local LangFlow v1.5+ (requires x-api-key)
             const headers = {
                 'Content-Type': 'application/json'
             };
 
-            // Only add auth headers if token is provided (for cloud LangFlow)
+            // Add API key header for local LangFlow authentication
             if (CONFIG.APPLICATION_TOKEN) {
-                headers['Authorization'] = `Bearer ${CONFIG.APPLICATION_TOKEN}`;
+                headers['x-api-key'] = CONFIG.APPLICATION_TOKEN;
             }
+
+            console.log('🔄 Calling LangFlow:', endpoint);
+            console.log('🔑 Using API key:', CONFIG.APPLICATION_TOKEN ? 'Yes' : 'No');
 
             const response = await fetch(endpoint, {
                 method: 'POST',
@@ -556,7 +559,14 @@ ${data.context_for_prompt || 'Data not available'}
                 body: JSON.stringify(payload)
             });
 
-            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            console.log('📡 LangFlow Response Status:', response.status);
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error('❌ LangFlow Error:', errorText);
+                throw new Error(`HTTP ${response.status}: ${errorText.substring(0, 100)}`);
+            }
+
             return await response.json();
         }
 
