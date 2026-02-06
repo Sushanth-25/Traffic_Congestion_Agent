@@ -29,11 +29,33 @@ import time
 
 # Load environment variables
 from dotenv import load_dotenv
-load_dotenv()
+from pathlib import Path
+import os
+
+# Try multiple paths to load .env
+env_paths = [
+    Path(__file__).resolve().parent.parent.parent / ".env",  # Project root
+    Path.cwd() / ".env",  # Current working directory
+]
+
+env_loaded = False
+for env_path in env_paths:
+    if env_path.exists():
+        load_dotenv(dotenv_path=env_path, override=True)
+        print(f"✅ Loaded .env from: {env_path}")
+        env_loaded = True
+        break
+
+if not env_loaded:
+    print("❌ WARNING: .env file not found!")
 
 # API Configuration
 TOMTOM_API_KEY = os.getenv("TOMTOM_API_KEY", "")
 OPENWEATHER_API_KEY = os.getenv("OPENWEATHER_API_KEY", "")
+
+# Debug: Print if keys are loaded (show first 10 chars)
+print(f"🔑 TomTom API Key: {'✅ ' + TOMTOM_API_KEY[:10] + '...' if TOMTOM_API_KEY else '❌ NOT FOUND'}")
+print(f"🔑 OpenWeather API Key: {'✅ ' + OPENWEATHER_API_KEY[:10] + '...' if OPENWEATHER_API_KEY else '❌ NOT FOUND'}")
 
 # Bangalore coordinates
 BANGALORE_CENTER = {"lat": 12.9716, "lon": 77.5946}
@@ -177,43 +199,80 @@ class LiveTrafficService:
     def _fetch_tomtom_traffic(self, coords: dict, location: str) -> TrafficData:
         """Fetch from TomTom Traffic Flow API."""
 
-        # TomTom Traffic Flow Segment Data API
-        url = f"https://api.tomtom.com/traffic/services/4/flowSegmentData/absolute/10/json"
-        params = {
-            "key": self.tomtom_key,
-            "point": f"{coords['lat']},{coords['lon']}",
-            "unit": "KMPH"
-        }
+        # Try multiple TomTom API endpoints
+        endpoints = [
+            # Endpoint 1: Flow Segment Data (relative)
+            {
+                "url": "https://api.tomtom.com/traffic/services/4/flowSegmentData/relative/10/json",
+                "params": {
+                    "key": self.tomtom_key,
+                    "point": f"{coords['lat']},{coords['lon']}",
+                    "unit": "KMPH"
+                }
+            },
+            # Endpoint 2: Flow Segment Data (absolute) - backup
+            {
+                "url": "https://api.tomtom.com/traffic/services/4/flowSegmentData/absolute/10/json",
+                "params": {
+                    "key": self.tomtom_key,
+                    "point": f"{coords['lat']},{coords['lon']}",
+                    "unit": "KMPH"
+                }
+            }
+        ]
 
-        response = requests.get(url, params=params, timeout=10)
-        response.raise_for_status()
-        data = response.json()
+        last_error = None
 
-        flow_data = data.get("flowSegmentData", {})
+        for endpoint_config in endpoints:
+            try:
+                response = requests.get(
+                    endpoint_config["url"],
+                    params=endpoint_config["params"],
+                    timeout=10
+                )
 
-        current_speed = flow_data.get("currentSpeed", 30)
-        free_flow_speed = flow_data.get("freeFlowSpeed", 50)
+                # Check if successful
+                if response.status_code == 200:
+                    data = response.json()
+                    flow_data = data.get("flowSegmentData", {})
 
-        # Calculate congestion level (0-100)
-        speed_ratio = current_speed / free_flow_speed if free_flow_speed > 0 else 0.5
-        congestion_level = max(0, min(100, (1 - speed_ratio) * 100))
+                    current_speed = flow_data.get("currentSpeed", 30)
+                    free_flow_speed = flow_data.get("freeFlowSpeed", 50)
 
-        # Calculate TTI (Travel Time Index)
-        tti = free_flow_speed / current_speed if current_speed > 0 else 2.0
+                    # Calculate congestion level (0-100)
+                    speed_ratio = current_speed / free_flow_speed if free_flow_speed > 0 else 0.5
+                    congestion_level = max(0, min(100, (1 - speed_ratio) * 100))
 
-        return TrafficData(
-            location=location,
-            current_speed=round(current_speed, 1),
-            free_flow_speed=round(free_flow_speed, 1),
-            congestion_level=round(congestion_level, 1),
-            congestion_category=self._categorize_congestion(congestion_level),
-            travel_time_ratio=round(tti, 2),
-            road_closure=flow_data.get("roadClosure", False),
-            incidents_nearby=0,  # Would need separate incidents API call
-            timestamp=datetime.now().isoformat(),
-            data_source="TomTom Live API",
-            confidence=0.95
-        )
+                    # Calculate TTI (Travel Time Index)
+                    tti = free_flow_speed / current_speed if current_speed > 0 else 2.0
+
+                    print(f"✅ TomTom API Success: {location} - {congestion_level}% congestion")
+
+                    return TrafficData(
+                        location=location,
+                        current_speed=round(current_speed, 1),
+                        free_flow_speed=round(free_flow_speed, 1),
+                        congestion_level=round(congestion_level, 1),
+                        congestion_category=self._categorize_congestion(congestion_level),
+                        travel_time_ratio=round(tti, 2),
+                        road_closure=flow_data.get("roadClosure", False),
+                        incidents_nearby=0,
+                        timestamp=datetime.now().isoformat(),
+                        data_source="TomTom Live API",
+                        confidence=0.95
+                    )
+                else:
+                    last_error = f"HTTP {response.status_code}: {response.text[:100]}"
+                    print(f"⚠️ TomTom endpoint failed: {response.status_code}")
+                    continue
+
+            except Exception as e:
+                last_error = str(e)
+                print(f"⚠️ TomTom API error: {e}")
+                continue
+
+        # If all endpoints fail, raise the last error
+        raise Exception(f"All TomTom endpoints failed. Last error: {last_error}")
 
     def _simulate_traffic_data(self, location: str) -> TrafficData:
         """
@@ -246,6 +305,12 @@ class LiveTrafficService:
         current_speed = free_flow * (1 - base_congestion/100)
         tti = free_flow / current_speed if current_speed > 5 else 3.0
 
+        # Determine data source label based on weather API availability
+        if self.weather_key:
+            data_source = "Simulated Traffic + Live Weather"
+        else:
+            data_source = "Simulated (TomTom API unavailable - 503 error)"
+
         return TrafficData(
             location=location,
             current_speed=round(max(5, current_speed), 1),
@@ -256,7 +321,7 @@ class LiveTrafficService:
             road_closure=False,
             incidents_nearby=random.randint(0, 3),
             timestamp=datetime.now().isoformat(),
-            data_source="Simulated (API key not configured)",
+            data_source=data_source,
             confidence=0.75
         )
 

@@ -318,6 +318,36 @@
         "className": "",
         "data": {
           "sourceHandle": {
+            "dataType": "IBMwatsonxModel",
+            "id": "IBMwatsonxModel-HyB5s",
+            "name": "text_output",
+            "output_types": [
+              "Message"
+            ]
+          },
+          "targetHandle": {
+            "fieldName": "input_value",
+            "id": "ChatOutput-kPg0c",
+            "inputTypes": [
+              "Data",
+              "DataFrame",
+              "Message"
+            ],
+            "type": "other"
+          }
+        },
+        "id": "xy-edge__IBMwatsonxModel-HyB5s{œdataTypeœ:œIBMwatsonxModelœ,œidœ:œIBMwatsonxModel-HyB5sœ,œnameœ:œtext_outputœ,œoutput_typesœ:[œMessageœ]}-ChatOutput-kPg0c{œfieldNameœ:œinput_valueœ,œidœ:œChatOutput-kPg0cœ,œinputTypesœ:[œDataœ,œDataFrameœ,œMessageœ],œtypeœ:œotherœ}",
+        "selected": false,
+        "source": "IBMwatsonxModel-HyB5s",
+        "sourceHandle": "{œdataTypeœ:œIBMwatsonxModelœ,œidœ:œIBMwatsonxModel-HyB5sœ,œnameœ:œtext_outputœ,œoutput_typesœ:[œMessageœ]}",
+        "target": "ChatOutput-kPg0c",
+        "targetHandle": "{œfieldNameœ:œinput_valueœ,œidœ:œChatOutput-kPg0cœ,œinputTypesœ:[œDataœ,œDataFrameœ,œMessageœ],œtypeœ:œotherœ}"
+      },
+      {
+        "animated": false,
+        "className": "",
+        "data": {
+          "sourceHandle": {
             "dataType": "TypeConverterComponent",
             "id": "TypeConverterComponent-a8R1t",
             "name": "message_output",
@@ -370,88 +400,6 @@
         "sourceHandle": "{œdataTypeœ:œAPIRequestœ,œidœ:œAPIRequest-ZJxNHœ,œnameœ:œdataœ,œoutput_typesœ:[œDataœ]}",
         "target": "TypeConverterComponent-a8R1t",
         "targetHandle": "{œfieldNameœ:œinput_dataœ,œidœ:œTypeConverterComponent-a8R1tœ,œinputTypesœ:[œMessageœ,œDataœ,œDataFrameœ],œtypeœ:œotherœ}"
-      },
-      {
-        "animated": false,
-        "className": "",
-        "data": {
-          "sourceHandle": {
-            "dataType": "ChatInput",
-            "id": "ChatInput-56yO0",
-            "name": "message",
-            "output_types": [
-              "Message"
-            ]
-          },
-          "targetHandle": {
-            "fieldName": "url_input",
-            "id": "APIRequest-ZJxNH",
-            "inputTypes": [
-              "Message"
-            ],
-            "type": "str"
-          }
-        },
-        "id": "xy-edge__ChatInput-56yO0{œdataTypeœ:œChatInputœ,œidœ:œChatInput-56yO0œ,œnameœ:œmessageœ,œoutput_typesœ:[œMessageœ]}-APIRequest-ZJxNH{œfieldNameœ:œurl_inputœ,œidœ:œAPIRequest-ZJxNHœ,œinputTypesœ:[œMessageœ],œtypeœ:œstrœ}",
-        "selected": false,
-        "source": "ChatInput-56yO0",
-        "sourceHandle": "{œdataTypeœ:œChatInputœ,œidœ:œChatInput-56yO0œ,œnameœ:œmessageœ,œoutput_typesœ:[œMessageœ]}",
-        "target": "APIRequest-ZJxNH",
-        "targetHandle": "{œfieldNameœ:œurl_inputœ,œidœ:œAPIRequest-ZJxNHœ,œinputTypesœ:[œMessageœ],œtypeœ:œstrœ}"
-      },
-      {
-        "animated": false,
-        "data": {
-          "sourceHandle": {
-            "dataType": "PythonREPLComponent",
-            "id": "PythonREPLComponent-fADAp",
-            "name": "results",
-            "output_types": [
-              "Data"
-            ]
-          },
-          "targetHandle": {
-            "fieldName": "input_value",
-            "id": "ChatOutput-kPg0c",
-            "inputTypes": [
-              "Data",
-              "DataFrame",
-              "Message"
-            ],
-            "type": "other"
-          }
-        },
-        "id": "xy-edge__PythonREPLComponent-fADAp{œdataTypeœ:œPythonREPLComponentœ,œidœ:œPythonREPLComponent-fADApœ,œnameœ:œresultsœ,œoutput_typesœ:[œDataœ]}-ChatOutput-kPg0c{œfieldNameœ:œinput_valueœ,œidœ:œChatOutput-kPg0cœ,œinputTypesœ:[œDataœ,œDataFrameœ,œMessageœ],œtypeœ:œotherœ}",
-        "selected": false,
-        "source": "PythonREPLComponent-fADAp",
-        "sourceHandle": "{œdataTypeœ:œPythonREPLComponentœ,œidœ:œPythonREPLComponent-fADApœ,œnameœ:œresultsœ,œoutput_typesœ:[œDataœ]}",
-        "target": "ChatOutput-kPg0c",
-        "targetHandle": "{œfieldNameœ:œinput_valueœ,œidœ:œChatOutput-kPg0cœ,œinputTypesœ:[œDataœ,œDataFrameœ,œMessageœ],œtypeœ:œotherœ}"
-      },
-      {
-        "data": {
-          "sourceHandle": {
-            "dataType": "IBMwatsonxModel",
-            "id": "IBMwatsonxModel-HyB5s",
-            "name": "text_output",
-            "output_types": [
-              "Message"
-            ]
-          },
-          "targetHandle": {
-            "fieldName": "python_code",
-            "id": "PythonREPLComponent-fADAp",
-            "inputTypes": [
-              "Message"
-            ],
-            "type": "str"
-          }
-        },
-        "id": "xy-edge__IBMwatsonxModel-HyB5s{œdataTypeœ:œIBMwatsonxModelœ,œidœ:œIBMwatsonxModel-HyB5sœ,œnameœ:œtext_outputœ,œoutput_typesœ:[œMessageœ]}-PythonREPLComponent-fADAp{œfieldNameœ:œpython_codeœ,œidœ:œPythonREPLComponent-fADApœ,œinputTypesœ:[œMessageœ],œtypeœ:œstrœ}",
-        "source": "IBMwatsonxModel-HyB5s",
-        "sourceHandle": "{œdataTypeœ:œIBMwatsonxModelœ,œidœ:œIBMwatsonxModel-HyB5sœ,œnameœ:œtext_outputœ,œoutput_typesœ:[œMessageœ]}",
-        "target": "PythonREPLComponent-fADAp",
-        "targetHandle": "{œfieldNameœ:œpython_codeœ,œidœ:œPythonREPLComponent-fADApœ,œinputTypesœ:[œMessageœ],œtypeœ:œstrœ}"
       }
     ],
     "nodes": [
@@ -1040,8 +988,8 @@
           "width": 192
         },
         "position": {
-          "x": 1896.1626700954546,
-          "y": 249.52169462951696
+          "x": 1381.979805504147,
+          "y": 294.6688995049934
         },
         "selected": false,
         "type": "genericNode"
@@ -1666,7 +1614,7 @@
             ],
             "frozen": false,
             "icon": "binary",
-            "last_updated": "2026-02-05T16:44:47.244Z",
+            "last_updated": "2026-02-05T17:27:05.252Z",
             "legacy": false,
             "lf_version": "1.7.1",
             "metadata": {
@@ -2422,7 +2370,7 @@
             ],
             "frozen": false,
             "icon": "AstraDB",
-            "last_updated": "2026-02-05T16:44:49.201Z",
+            "last_updated": "2026-02-05T17:27:05.257Z",
             "legacy": false,
             "lf_version": "1.7.1",
             "metadata": {
@@ -3368,7 +3316,7 @@
             ],
             "frozen": false,
             "icon": "AstraDB",
-            "last_updated": "2026-02-05T16:44:49.204Z",
+            "last_updated": "2026-02-05T17:28:58.711Z",
             "legacy": false,
             "lf_version": "1.7.1",
             "metadata": {
@@ -3492,7 +3440,9 @@
                 "external_options": {},
                 "info": "The API Endpoint for the Astra DB instance. Supercedes database selection.",
                 "name": "api_endpoint",
-                "options": [],
+                "options": [
+                  "https://d55291a8-afef-4c26-93b7-75d319d6e60f-us-east-2.apps.astra.datastax.com"
+                ],
                 "options_metadata": [],
                 "override_skip": false,
                 "placeholder": "",
@@ -3504,7 +3454,7 @@
                 "trace_as_metadata": true,
                 "track_in_telemetry": true,
                 "type": "str",
-                "value": ""
+                "value": "https://d55291a8-afef-4c26-93b7-75d319d6e60f-us-east-2.apps.astra.datastax.com"
               },
               "astradb_vectorstore_kwargs": {
                 "_input_type": "NestedDictInput",
@@ -3698,8 +3648,24 @@
                 "external_options": {},
                 "info": "The name of the collection within Astra DB where the vectors will be stored.",
                 "name": "collection_name",
-                "options": [],
-                "options_metadata": [],
+                "options": [
+                  "final_new",
+                  "traffic_knowledge"
+                ],
+                "options_metadata": [
+                  {
+                    "icon": "vectorstores",
+                    "model": null,
+                    "provider": null,
+                    "records": 0
+                  },
+                  {
+                    "icon": "vectorstores",
+                    "model": null,
+                    "provider": null,
+                    "records": 126
+                  }
+                ],
                 "override_skip": false,
                 "placeholder": "",
                 "real_time_refresh": true,
@@ -3711,14 +3677,14 @@
                   "provider": null,
                   "records": 0
                 },
-                "show": false,
+                "show": true,
                 "title_case": false,
                 "toggle": false,
                 "tool_mode": false,
                 "trace_as_metadata": true,
                 "track_in_telemetry": true,
                 "type": "str",
-                "value": ""
+                "value": "final_new"
               },
               "content_field": {
                 "_input_type": "StrInput",
@@ -3867,7 +3833,7 @@
                   "api_endpoints": [
                     "https://d55291a8-afef-4c26-93b7-75d319d6e60f-us-east-2.apps.astra.datastax.com"
                   ],
-                  "collections": 1,
+                  "collections": 2,
                   "keyspaces": [
                     "default_keyspace"
                   ],
@@ -3881,7 +3847,7 @@
                 "trace_as_metadata": true,
                 "track_in_telemetry": true,
                 "type": "str",
-                "value": ""
+                "value": "traffic_db"
               },
               "deletion_field": {
                 "_input_type": "StrInput",
@@ -4262,7 +4228,7 @@
         "dragging": false,
         "id": "AstraDB-A0R5g",
         "measured": {
-          "height": 413,
+          "height": 495,
           "width": 320
         },
         "position": {
@@ -4305,7 +4271,7 @@
             ],
             "frozen": false,
             "icon": "binary",
-            "last_updated": "2026-02-05T16:44:47.249Z",
+            "last_updated": "2026-02-05T17:27:05.264Z",
             "legacy": false,
             "lf_version": "1.7.1",
             "metadata": {
@@ -5231,7 +5197,7 @@
           "showNode": true,
           "type": "ParserComponent"
         },
-        "dragging": true,
+        "dragging": false,
         "id": "ParserComponent-oSlEl",
         "measured": {
           "height": 246,
@@ -5239,9 +5205,9 @@
         },
         "position": {
           "x": 64.92678776825514,
-          "y": 722.4717119319021
+          "y": 603.5630192721734
         },
-        "selected": true,
+        "selected": false,
         "type": "genericNode"
       },
       {
@@ -5279,7 +5245,7 @@
             ],
             "frozen": false,
             "icon": "file-text",
-            "last_updated": "2026-02-05T16:44:47.252Z",
+            "last_updated": "2026-02-05T17:27:05.270Z",
             "legacy": false,
             "metadata": {
               "code_hash": "9cad30eb26b9",
@@ -5831,6 +5797,7 @@
             "key": "Memory",
             "last_updated": "2026-02-04T17:45:01.753Z",
             "legacy": false,
+            "lf_version": "1.7.1",
             "metadata": {
               "code_hash": "efd064ef48ff",
               "dependencies": {
@@ -6591,8 +6558,8 @@
           "width": 320
         },
         "position": {
-          "x": 1563.8195191329805,
-          "y": 749.6638684047456
+          "x": 1357.1924576258098,
+          "y": 452.3224872114998
         },
         "selected": false,
         "type": "genericNode"
@@ -7020,7 +6987,7 @@
           "x": -380.5656350163706,
           "y": -126.93021033589368
         },
-        "selected": false,
+        "selected": true,
         "type": "genericNode"
       },
       {
@@ -7187,164 +7154,19 @@
         },
         "selected": false,
         "type": "genericNode"
-      },
-      {
-        "data": {
-          "id": "PythonREPLComponent-fADAp",
-          "node": {
-            "base_classes": [
-              "Data"
-            ],
-            "beta": false,
-            "conditional_paths": [],
-            "custom_fields": {},
-            "description": "Run Python code with optional imports. Use print() to see the output.",
-            "display_name": "Python Interpreter",
-            "documentation": "https://docs.langflow.org/python-interpreter",
-            "edited": false,
-            "field_order": [
-              "global_imports",
-              "python_code"
-            ],
-            "frozen": false,
-            "icon": "square-terminal",
-            "legacy": false,
-            "metadata": {
-              "code_hash": "80eeaf032b83",
-              "dependencies": {
-                "dependencies": [
-                  {
-                    "name": "langchain_experimental",
-                    "version": "0.3.4"
-                  },
-                  {
-                    "name": "lfx",
-                    "version": "0.2.1"
-                  }
-                ],
-                "total_dependencies": 2
-              },
-              "module": "lfx.components.utilities.python_repl_core.PythonREPLComponent"
-            },
-            "minimized": false,
-            "output_types": [],
-            "outputs": [
-              {
-                "allows_loop": false,
-                "cache": true,
-                "display_name": "Results",
-                "group_outputs": false,
-                "method": "run_python_repl",
-                "name": "results",
-                "selected": "Data",
-                "tool_mode": true,
-                "types": [
-                  "Data"
-                ],
-                "value": "__UNDEFINED__"
-              }
-            ],
-            "pinned": false,
-            "template": {
-              "_type": "Component",
-              "code": {
-                "advanced": true,
-                "dynamic": true,
-                "fileTypes": [],
-                "file_path": "",
-                "info": "",
-                "list": false,
-                "load_from_db": false,
-                "multiline": true,
-                "name": "code",
-                "password": false,
-                "placeholder": "",
-                "required": true,
-                "show": true,
-                "title_case": false,
-                "type": "code",
-                "value": "import importlib\n\nfrom langchain_experimental.utilities import PythonREPL\n\nfrom lfx.custom.custom_component.component import Component\nfrom lfx.io import MultilineInput, Output, StrInput\nfrom lfx.schema.data import Data\n\n\nclass PythonREPLComponent(Component):\n    display_name = \"Python Interpreter\"\n    description = \"Run Python code with optional imports. Use print() to see the output.\"\n    documentation: str = \"https://docs.langflow.org/python-interpreter\"\n    icon = \"square-terminal\"\n\n    inputs = [\n        StrInput(\n            name=\"global_imports\",\n            display_name=\"Global Imports\",\n            info=\"A comma-separated list of modules to import globally, e.g. 'math,numpy,pandas'.\",\n            value=\"math,pandas\",\n            required=True,\n        ),\n        MultilineInput(\n            name=\"python_code\",\n            display_name=\"Python Code\",\n            info=\"The Python code to execute. Only modules specified in Global Imports can be used.\",\n            value=\"print('Hello, World!')\",\n            input_types=[\"Message\"],\n            tool_mode=True,\n            required=True,\n        ),\n    ]\n\n    outputs = [\n        Output(\n            display_name=\"Results\",\n            name=\"results\",\n            type_=Data,\n            method=\"run_python_repl\",\n        ),\n    ]\n\n    def get_globals(self, global_imports: str | list[str]) -> dict:\n        \"\"\"Create a globals dictionary with only the specified allowed imports.\"\"\"\n        global_dict = {}\n\n        try:\n            if isinstance(global_imports, str):\n                modules = [module.strip() for module in global_imports.split(\",\")]\n            elif isinstance(global_imports, list):\n                modules = global_imports\n            else:\n                msg = \"global_imports must be either a string or a list\"\n                raise TypeError(msg)\n\n            for module in modules:\n                try:\n                    imported_module = importlib.import_module(module)\n                    global_dict[imported_module.__name__] = imported_module\n                except ImportError as e:\n                    msg = f\"Could not import module {module}: {e!s}\"\n                    raise ImportError(msg) from e\n\n        except Exception as e:\n            self.log(f\"Error in global imports: {e!s}\")\n            raise\n        else:\n            self.log(f\"Successfully imported modules: {list(global_dict.keys())}\")\n            return global_dict\n\n    def run_python_repl(self) -> Data:\n        try:\n            globals_ = self.get_globals(self.global_imports)\n            python_repl = PythonREPL(_globals=globals_)\n            result = python_repl.run(self.python_code)\n            result = result.strip() if result else \"\"\n\n            self.log(\"Code execution completed successfully\")\n            return Data(data={\"result\": result})\n\n        except ImportError as e:\n            error_message = f\"Import Error: {e!s}\"\n            self.log(error_message)\n            return Data(data={\"error\": error_message})\n\n        except SyntaxError as e:\n            error_message = f\"Syntax Error: {e!s}\"\n            self.log(error_message)\n            return Data(data={\"error\": error_message})\n\n        except (NameError, TypeError, ValueError) as e:\n            error_message = f\"Error during execution: {e!s}\"\n            self.log(error_message)\n            return Data(data={\"error\": error_message})\n\n    def build(self):\n        return self.run_python_repl\n"
-              },
-              "global_imports": {
-                "_input_type": "StrInput",
-                "advanced": false,
-                "display_name": "Global Imports",
-                "dynamic": false,
-                "info": "A comma-separated list of modules to import globally, e.g. 'math,numpy,pandas'.",
-                "list": false,
-                "list_add_label": "Add More",
-                "load_from_db": false,
-                "name": "global_imports",
-                "override_skip": false,
-                "placeholder": "",
-                "required": true,
-                "show": true,
-                "title_case": false,
-                "tool_mode": false,
-                "trace_as_metadata": true,
-                "track_in_telemetry": false,
-                "type": "str",
-                "value": "from datetime import datetime"
-              },
-              "python_code": {
-                "_input_type": "MultilineInput",
-                "advanced": false,
-                "ai_enabled": false,
-                "copy_field": false,
-                "display_name": "Python Code",
-                "dynamic": false,
-                "info": "The Python code to execute. Only modules specified in Global Imports can be used.",
-                "input_types": [
-                  "Message"
-                ],
-                "list": false,
-                "list_add_label": "Add More",
-                "load_from_db": false,
-                "multiline": true,
-                "name": "python_code",
-                "override_skip": false,
-                "placeholder": "",
-                "required": true,
-                "show": true,
-                "title_case": false,
-                "tool_mode": true,
-                "trace_as_input": true,
-                "trace_as_metadata": true,
-                "track_in_telemetry": false,
-                "type": "str",
-                "value": "llm_response = input\n\nconfidence = 0.85\nresponse = llm_response\n\n# Ensure confidence section exists\nif \"CONFIDENCE\" not in response.upper():\n    response += f\"\"\"\n\n### 💡 CONFIDENCE SCORE: {int(confidence * 100)}%\nAnalysis based on available data and historical patterns.\n\"\"\"\n\n# Add timestamp\nresponse += f\"\\n\\n---\\n*Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}*\"\n\noutput = response"
-              }
-            },
-            "tool_mode": false
-          },
-          "showNode": true,
-          "type": "PythonREPLComponent"
-        },
-        "dragging": false,
-        "id": "PythonREPLComponent-fADAp",
-        "measured": {
-          "height": 302,
-          "width": 320
-        },
-        "position": {
-          "x": 1403.8651107929993,
-          "y": 337.68723441747204
-        },
-        "selected": false,
-        "type": "genericNode"
       }
     ],
     "viewport": {
-      "x": 389.05238697350126,
-      "y": 229.21893434649928,
-      "zoom": 0.39685024508347977
+      "x": 364.662089691759,
+      "y": 74.47646261624095,
+      "zoom": 0.4881211398270916
     }
   },
-  "description": "",
+  "description": "Empowering Language Engineering.",
   "endpoint_name": null,
   "id": "137044c6-b3d3-45ea-ab20-369911351609",
   "is_component": false,
   "last_tested_version": "1.7.1",
-  "name": "final_flow",
+  "name": "new_final",
   "tags": []
 }

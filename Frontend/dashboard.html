@@ -308,13 +308,14 @@
 
     <!-- Main Application Logic -->
     <script>
-        // Configuration
+        // Configuration - Updated for Local LangFlow
         const CONFIG = {
-            LANGFLOW_API_URL: typeof LANGFLOW_CONFIG !== 'undefined' ? LANGFLOW_CONFIG.apiUrl : '',
-            FLOW_ID: typeof LANGFLOW_CONFIG !== 'undefined' ? LANGFLOW_CONFIG.flowId : '',
-            APPLICATION_TOKEN: typeof LANGFLOW_CONFIG !== 'undefined' ? LANGFLOW_CONFIG.applicationToken : '',
-            ORGANIZATION_ID: typeof LANGFLOW_CONFIG !== 'undefined' ? LANGFLOW_CONFIG.organizationId : '',
-            LOCAL_API_URL: 'http://localhost:8001'  // Our FastAPI server
+            // Use local LangFlow instead of cloud
+            LANGFLOW_API_URL: 'http://localhost:7860/api/v1/run',
+            FLOW_ID: typeof LANGFLOW_CONFIG !== 'undefined' ? LANGFLOW_CONFIG.flowId : 'e41bb74e-e873-4391-9bb8-dd2fb329167c',
+            APPLICATION_TOKEN: typeof LANGFLOW_CONFIG !== 'undefined' ? LANGFLOW_CONFIG.applicationToken : 'sk-MsGldUXxeOd0Zc5kPbu_gdBUtxnYmzNbXSwqvMd_xxc',
+            LOCAL_API_URL: 'http://localhost:8001',  // Our FastAPI server
+            USE_DIRECT_API: true  // Set to true to bypass LangFlow and use API directly for testing
         };
 
         // State
@@ -447,41 +448,81 @@
             try {
                 // Try to get context from local API first
                 let localContext = '';
+                let contextData = null;
+
                 try {
                     const areaMatch = message.match(/silk board|koramangala|whitefield|marathahalli|m\.?g\.? road|electronic city|indiranagar|hebbal|jayanagar/i);
                     if (areaMatch) {
                         const area = areaMatch[0].replace(/\./g, '').replace(/ /g, '-');
                         const contextResponse = await fetch(`${CONFIG.LOCAL_API_URL}/langflow/${area}`);
                         if (contextResponse.ok) {
-                            const contextData = await contextResponse.json();
+                            contextData = await contextResponse.json();
                             localContext = contextData.context_for_prompt;
                             updateVisualization(contextData);
                         }
                     }
                 } catch (e) {
-                    console.log('Local API not available, using LangFlow only');
+                    console.log('Local API context fetch failed:', e);
                 }
 
-                // Call LangFlow API
-                const response = await callLangflowAPI(message, localContext);
-                removeTypingIndicator(typingId);
+                let aiMessage;
 
-                if (response && response.outputs && response.outputs.length > 0) {
-                    const aiMessage = extractMessageFromOutput(response.outputs[0]);
-                    addMessageToChat(aiMessage, 'ai');
+                // If USE_DIRECT_API is enabled, bypass LangFlow
+                if (CONFIG.USE_DIRECT_API && localContext) {
+                    console.log('Using direct API mode (bypassing LangFlow)');
+                    // Format the response directly from our API data
+                    aiMessage = formatDirectAPIResponse(contextData, message);
                 } else {
-                    throw new Error('Invalid response format');
+                    // Try LangFlow API
+                    try {
+                        const response = await callLangflowAPI(message, localContext);
+                        aiMessage = extractMessageFromOutput(response.outputs[0]);
+                    } catch (langflowError) {
+                        console.error('LangFlow error:', langflowError);
+                        // Fallback to direct API if LangFlow fails
+                        if (localContext) {
+                            console.log('LangFlow failed, using direct API fallback');
+                            aiMessage = formatDirectAPIResponse(contextData, message);
+                        } else {
+                            throw langflowError;
+                        }
+                    }
                 }
+
+                removeTypingIndicator(typingId);
+                addMessageToChat(aiMessage, 'ai');
 
             } catch (error) {
                 console.error('Error:', error);
                 removeTypingIndicator(typingId);
-                addMessageToChat(`Sorry, I encountered an error: ${error.message}`, 'error');
+                addMessageToChat(`Sorry, I encountered an error: ${error.message}. Make sure LangFlow is running on port 7860 or enable direct API mode.`, 'error');
             } finally {
                 state.isProcessing = false;
                 sendButton.disabled = false;
                 userInput.focus();
             }
+        }
+
+        // Format direct API response (bypass LangFlow)
+        function formatDirectAPIResponse(data, question) {
+            if (!data) return 'No data available';
+
+            const location = data.location || 'Unknown';
+            const confidence = Math.round((data.confidence || 0.75) * 100);
+
+            return `📍 **LOCATION**: ${location}
+⏰ **As of**: ${new Date().toLocaleString('en-IN', { hour: '2-digit', minute: '2-digit', weekday: 'short' })}
+
+### 🔍 LIVE DATA
+
+${data.context_for_prompt || 'Data not available'}
+
+### 💡 CONFIDENCE: ${confidence}%
+
+*Data fetched directly from TomTom & OpenWeather APIs*
+
+---
+**Note**: This response uses direct API data. Connect LangFlow for AI-enhanced analysis.`;
         }
 
         // Call LangFlow API
@@ -499,13 +540,19 @@
                 input_type: "chat"
             };
 
+            // Headers for local LangFlow (no authentication needed)
+            const headers = {
+                'Content-Type': 'application/json'
+            };
+
+            // Only add auth headers if token is provided (for cloud LangFlow)
+            if (CONFIG.APPLICATION_TOKEN) {
+                headers['Authorization'] = `Bearer ${CONFIG.APPLICATION_TOKEN}`;
+            }
+
             const response = await fetch(endpoint, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${CONFIG.APPLICATION_TOKEN}`,
-                    'X-DataStax-Current-Org': CONFIG.ORGANIZATION_ID
-                },
+                headers: headers,
                 body: JSON.stringify(payload)
             });
 

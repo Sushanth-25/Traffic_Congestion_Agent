@@ -19,7 +19,7 @@
 ### Phase 3: Integration & Testing
 - [ ] Connect all agents in LangFlow
 - [ ] Test with sample traffic scenarios
-- [ ] Deploy to IBM Cloud
+- [ ] Run local API server
 
 ### Phase 4: Presentation
 - [ ] Create PPT from template

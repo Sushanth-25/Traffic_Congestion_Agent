@@ -38,6 +38,9 @@ env/
 *.swo
 *~
 
+# Frontend config with credentials
+Frontend/config.js
+
 # Environment variables
 .env
 .env.local

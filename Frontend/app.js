@@ -117,13 +117,21 @@ async function callLangflowAPI(message) {
         tweaks: CONFIG.TWEAKS
     };
     
-    // Prepare headers with authentication for DataStax Langflow (cloud-hosted)
+   // Headers for local or cloud Langflow
     const headers = {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${CONFIG.APPLICATION_TOKEN}`,
-        'X-DataStax-Current-Org': CONFIG.ORGANIZATION_ID
+        'Content-Type': 'application/json'
     };
-    
+
+    // Add authentication only if token is provided (for cloud/authenticated local)
+    if (CONFIG.APPLICATION_TOKEN) {
+        headers['Authorization'] = `Bearer ${CONFIG.APPLICATION_TOKEN}`;
+    }
+
+    // Add org header only if provided (for DataStax cloud)
+    if (CONFIG.ORGANIZATION_ID) {
+        headers['X-DataStax-Current-Org'] = CONFIG.ORGANIZATION_ID;
+    }
+
     const response = await fetch(endpoint, {
         method: 'POST',
         headers: headers,

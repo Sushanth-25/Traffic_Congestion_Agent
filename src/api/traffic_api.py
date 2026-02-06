@@ -32,11 +32,7 @@ from datetime import datetime
 
 # Load environment variables from .env file
 from dotenv import load_dotenv
-
-# Load .env from project root (works both locally and in cloud)
-env_path = Path(__file__).resolve().parent.parent.parent / ".env"
-if env_path.exists():
-    load_dotenv(dotenv_path=env_path)
+load_dotenv()
 
 # ==================== CONFIGURATION FROM ENVIRONMENT ====================
 LANGFLOW_API_KEY = os.getenv("LANGFLOW_API_KEY")
@@ -498,6 +494,44 @@ Fallback information:
 - Is Peak Hour: {'Yes' if 8 <= datetime.now().hour <= 10 or 17 <= datetime.now().hour <= 20 else 'No'}
 """
         }
+
+
+@app.get("/live-data")
+async def live_data_text(query: str = Query(..., description="User's traffic query")):
+    """
+    🎯 SIMPLE TEXT ENDPOINT FOR LANGFLOW - Returns ONLY plain text, no JSON.
+
+    Use this endpoint if LangFlow has trouble parsing JSON.
+    Returns the formatted traffic data as plain text string.
+
+    URL: http://localhost:8001/live-data?query=traffic at silk board
+    """
+    from fastapi.responses import PlainTextResponse
+
+    # Extract location from query
+    location = extract_location_from_query(query)
+
+    if not location:
+        return PlainTextResponse(content=f"""
+=== BANGALORE TRAFFIC INFO ===
+Timestamp: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+Query: {query}
+
+No specific location detected. Please ask about:
+Silk Board, Koramangala, Whitefield, Marathahalli, Electronic City, etc.
+""")
+
+    try:
+        insight = traffic_service.get_combined_insight(location)
+        formatted = format_for_langflow(insight)
+        return PlainTextResponse(content=formatted)
+    except Exception as e:
+        return PlainTextResponse(content=f"""
+=== TRAFFIC DATA FOR {location.upper()} ===
+Timestamp: {datetime.now().isoformat()}
+Error: {str(e)}
+Location: {location}
+""")
 
 
 @app.get("/smart-traffic/{query_path:path}")
