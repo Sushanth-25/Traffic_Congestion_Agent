@@ -32,7 +32,10 @@ from datetime import datetime
 
 # Load environment variables from .env file
 from dotenv import load_dotenv
-load_dotenv()
+
+# Define the path to the .env file (in project root, 2 directories up from this file)
+env_path = Path(__file__).parent.parent.parent / '.env'
+load_dotenv(dotenv_path=env_path)
 
 # ==================== CONFIGURATION FROM ENVIRONMENT ====================
 LANGFLOW_API_KEY = os.getenv("LANGFLOW_API_KEY")

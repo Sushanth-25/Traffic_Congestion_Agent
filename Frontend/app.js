@@ -108,14 +108,35 @@ async function sendMessage(message) {
 
 // Call Langflow API
 async function callLangflowAPI(message) {
-    const endpoint = `${CONFIG.LANGFLOW_API_URL}/${CONFIG.FLOW_ID}`;
+    // Build endpoint with optional API key as query parameter
+    let endpoint = `${CONFIG.LANGFLOW_API_URL}/${CONFIG.FLOW_ID}`;
+    
+    // For local LangFlow, add API key as query param if no Bearer token will be used
+    if (CONFIG.APPLICATION_TOKEN && !CONFIG.APPLICATION_TOKEN.startsWith('Bearer')) {
+        endpoint += `?x-api-key=${CONFIG.APPLICATION_TOKEN}`;
+    }
+    
+    // Generate unique session ID for this conversation
+    const sessionId = crypto.randomUUID();
+    
+    // Build tweaks with the user's message
+    const tweaks = {
+        ...CONFIG.TWEAKS,
+        "ChatInput-oxbHs": {
+            ...CONFIG.TWEAKS["ChatInput-oxbHs"],
+            "input_value": message,
+            "session_id": sessionId
+        }
+    };
     
     const payload = {
-        input_value: message,
         output_type: "chat",
         input_type: "chat",
-        tweaks: CONFIG.TWEAKS
+        tweaks: tweaks
     };
+    
+    // Add session_id at root level for tracking
+    payload.session_id = sessionId;
     
    // Headers for local or cloud Langflow
     const headers = {
