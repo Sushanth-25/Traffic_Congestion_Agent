@@ -78,10 +78,10 @@ BANGALORE_AREAS = {
     "Old Airport Road": {"lat": 12.9600, "lon": 77.6500},
 }
 
-# Cache for API responses (reduces API calls)
+# Cache for API responses (disabled for live demo)
 _traffic_cache = {}
 _weather_cache = {}
-CACHE_DURATION = 300  # 5 minutes
+CACHE_DURATION = 0  # Disabled - always fetch fresh data
 
 
 @dataclass

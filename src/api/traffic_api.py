@@ -323,21 +323,83 @@ async def langflow_context(location: str):
 
 @app.get("/all-areas-status")
 async def all_areas_status():
-    """Get quick status for all Bangalore areas."""
-    results = {}
+    """
+    Compact live traffic report for all Bangalore areas.
+    Optimized for LLM context window — minimal tokens, maximum data.
+    """
+    from fastapi.responses import PlainTextResponse
 
+    now = datetime.now()
+    hour = now.hour
+    is_weekend = now.weekday() >= 5
+
+    if 7 <= hour < 10:
+        period = "Morning Peak"
+        is_peak = True
+    elif 10 <= hour < 16:
+        period = "Midday"
+        is_peak = False
+    elif 16 <= hour < 20:
+        period = "Evening Peak"
+        is_peak = True
+    else:
+        period = "Off-Peak"
+        is_peak = False
+
+    # Get weather once
+    try:
+        weather = traffic_service.get_weather("Bangalore")
+        weather_line = f"{weather.condition}, {weather.temperature}°C, Humidity {weather.humidity}%, Wind {weather.wind_speed}km/h, Visibility {weather.visibility}km, Impact: {weather.weather_impact} ({weather.impact_percentage}% speed reduction)"
+    except Exception:
+        weather_line = "Clear, 27°C, Impact: None"
+
+    # Header
+    lines = []
+    lines.append(f"LIVE BANGALORE TRAFFIC REPORT | {now.strftime('%Y-%m-%d %H:%M')} | {now.strftime('%A')} {period} | Peak: {'Yes' if is_peak else 'No'} | Weekend: {'Yes' if is_weekend else 'No'}")
+    lines.append(f"Weather: {weather_line}")
+    lines.append(f"Sources: TomTom Traffic API + OpenWeatherMap API")
+    lines.append("")
+
+    # Collect and sort areas
+    area_rows = []
     for area in BANGALORE_AREAS:
         try:
-            traffic = traffic_service.get_live_traffic(area)
-            results[area] = {
-                "congestion": traffic.congestion_level,
-                "category": traffic.congestion_category,
-                "speed": traffic.current_speed
-            }
+            insight = traffic_service.get_combined_insight(area)
+            t = insight.traffic
+            hist_avg = insight.historical_comparison.get("historical_avg_congestion", 0)
+            factors = ", ".join([f"{f['factor']}:{f['contribution_pct']}%" for f in insight.contributing_factors])
+            
+            area_rows.append({
+                "area": area,
+                "congestion": t.congestion_level,
+                "cat": t.congestion_category,
+                "speed": t.current_speed,
+                "freeflow": t.free_flow_speed,
+                "tti": t.travel_time_ratio,
+                "incidents": t.incidents_nearby,
+                "closure": t.road_closure,
+                "factors": factors,
+                "hist": hist_avg,
+                "conf": insight.confidence_score,
+            })
         except:
-            results[area] = {"error": "Failed to fetch"}
+            continue
 
-    return results
+    area_rows.sort(key=lambda x: x["congestion"], reverse=True)
+
+    # Compact format: one area per 2 lines
+    for i, a in enumerate(area_rows, 1):
+        comp = "Higher" if a["congestion"] > a["hist"] else "Lower"
+        lines.append(f"{i}. {a['area']}: {a['congestion']}% ({a['cat']}) | Speed: {a['speed']}/{a['freeflow']}km/h | TTI: {a['tti']}x | Incidents: {a['incidents']} | Closure: {'Yes' if a['closure'] else 'No'}")
+        lines.append(f"   Factors: {a['factors']} | Historical: {a['hist']}% ({comp}) | Confidence: {a['conf']*100:.0f}%")
+
+    # Quick summary
+    if area_rows:
+        avg = sum(a["congestion"] for a in area_rows) / len(area_rows)
+        lines.append("")
+        lines.append(f"SUMMARY: {len(area_rows)} areas | Avg: {avg:.1f}% | Worst: {area_rows[0]['area']} ({area_rows[0]['congestion']}%) | Best: {area_rows[-1]['area']} ({area_rows[-1]['congestion']}%)")
+
+    return {"report": "\n".join(lines)}
 
 
 # ==================== SMART ENDPOINT FOR LANGFLOW (NO HARDCODING) ====================
